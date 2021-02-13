@@ -31,9 +31,9 @@ namespace MMTShop.Client.Features.Products
                 $"{HttpClientConstants.GetProductsUrl}/{categoryName}");
 
             var response = await RestClient
-                .GetAsync<List<Product>>(request, cancellationToken);
+                .GetAsync<ProductResponse>(request, cancellationToken);
 
-            return response;
+            return response.Products;
         }
 
         public ProductProvider(IRestClient restClient)

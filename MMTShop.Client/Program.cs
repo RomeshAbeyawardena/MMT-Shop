@@ -37,12 +37,11 @@ namespace MMTShop.Client
             Console.WriteLine("GoodBye!");
         }
 
-        #region Local Methods
+        #region Methods
         private static void Initialize(string baseUrl)
         {
             isRunning = true;
             var servicesCollection = new ServiceCollection();
-            actionDictionary = new Dictionary<int, Func<Task>>();
             
             services = servicesCollection
                 .AddScoped<IRestClient>((s) => new RestClient(baseUrl))
@@ -50,10 +49,22 @@ namespace MMTShop.Client
                 .AddScoped<ICategoryProvider, CategoryProvider>()
                 .BuildServiceProvider();
 
-            actionDictionary.Add(1, GetFeaturedProducts);
-            actionDictionary.Add(2, GetCategories);
+            actionDictionary = new Dictionary<int, Func<Task>>
+            {
+                { 1, GetFeaturedProducts },
+                { 2, GetCategories }
+            };
         }
 
+        private static async Task GetFeaturedProducts()
+        {
+            var products = await ProductProvider
+                .GetFeaturedProductsAsync(CancellationToken.None);
+
+            DisplayProducts(products);
+        }
+
+        
         private static async Task GetCategories()
         {
             var categoryProvider = services
@@ -63,15 +74,31 @@ namespace MMTShop.Client
                 .GetCategories(CancellationToken.None);
 
             DisplayCategories(categories);
+            Console.WriteLine("Enter the category you wish to view products for:");
+
+            var categoryName = Console.ReadLine();
+            if(!string.IsNullOrWhiteSpace(categoryName))
+            { 
+                if(categories
+                    .Any(category => category.Name.Equals(categoryName, 
+                        StringComparison.InvariantCultureIgnoreCase)))
+                { 
+                    await GetProductsByCategory(categoryName);
+                    return;
+                }
+
+                Console.WriteLine("Invalid category");
+            }
+
+            Console.WriteLine("No category selected");
         }
 
-        private static async Task GetFeaturedProducts()
+        private static async Task GetProductsByCategory(string categoryName)
         {
-            var productProvider = services
-                .GetRequiredService<IProductProvider>();
-
-            var products = await productProvider
-                .GetFeaturedProductsAsync(CancellationToken.None);
+            var products = await ProductProvider
+                .GetProductsByCategoryName(
+                    categoryName,
+                    CancellationToken.None);
 
             DisplayProducts(products);
         }
@@ -79,8 +106,7 @@ namespace MMTShop.Client
         private static void DisplayOptions()
         {
             Console.WriteLine("1. Display featured products{0}" +
-                "2. Display categories{0}" +
-                "3. Display products of a specific category{0}" +
+                "2. Display categories and get products for a specific category{0}" +
                 "q. Quit", newLine);
         }
 
@@ -138,14 +164,14 @@ namespace MMTShop.Client
                     newLine));
         }
 
-        private static void Display<T>(IEnumerable<T> items, string itemType, Func<T, string> itemDisplayFormat, params object[] args)
+        private static void Display<T>(IEnumerable<T> items, string itemType, Func<T, string> itemDisplayFormat)
         {
             var productCount = items.Count();
             for(var productIndex = 0; productIndex < productCount; productIndex++)
             {
                 var item = items
                     .ElementAt(productIndex);
-                Console.WriteLine("--- {0} {1} of {2}---{3}{3}",
+                Console.WriteLine("--- {0} {1} of {2} ---{3}{3}",
                     itemType,
                     productIndex + 1, 
                     productCount,
@@ -154,9 +180,14 @@ namespace MMTShop.Client
                 Console.WriteLine(
                     itemDisplayFormat(item));
 
-                Console.WriteLine("------------------------------- {0}", newLine);
+                Console.WriteLine("-------------------------------{0}", newLine);
             }
         }
+        #endregion
+
+        #region Properties
+        public static IProductProvider ProductProvider => services
+                .GetRequiredService<IProductProvider>();
         #endregion
 
         #region Fields

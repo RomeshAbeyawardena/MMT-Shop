@@ -2,8 +2,8 @@
 
 namespace MMTShop.Server.Features.Product.GetFeaturedProducts
 {
-    public class GetFeaturedProductRequest 
-        : IRequest<GetFeaturedProductResponse>
+    public class GetFeaturedProductsRequest 
+        : IRequest<GetFeaturedProductsResponse>
     {
         
     }

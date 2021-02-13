@@ -8,21 +8,21 @@ using System.Threading.Tasks;
 
 namespace MMTShop.Server.Features.Product.GetFeaturedProducts
 {
-    public class GetFeaturedProductHandler 
-        : DbRequestHandlerBase<GetFeaturedProductRequest, GetFeaturedProductResponse>
+    public class GetFeaturedProductsHandler 
+        : DbRequestHandlerBase<GetFeaturedProductsRequest, GetFeaturedProductsResponse>
     {
-        public override async Task<GetFeaturedProductResponse> Handle(
-            GetFeaturedProductRequest request, 
+        public override async Task<GetFeaturedProductsResponse> Handle(
+            GetFeaturedProductsRequest request, 
             CancellationToken cancellationToken)
         {
             var products = await DbConnection
                 .QueryAsync<Shared.Models.Product>(DataAccess
                     .GetCommand(DataConstants.GetFeaturedProducts));
 
-            return new GetFeaturedProductResponse { Products = products };
+            return new GetFeaturedProductsResponse { Products = products };
         }
 
-        public GetFeaturedProductHandler(
+        public GetFeaturedProductsHandler(
             IDbConnection dbConnection,
             IDataAccess dataAccess)
             : base(dbConnection, 

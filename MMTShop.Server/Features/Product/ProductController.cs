@@ -11,7 +11,7 @@ namespace MMTShop.Server.Features.Product
     {
         [HttpGet]
         public Task<IActionResult> GetFeaturedProducts(
-            [FromQuery]GetFeaturedProductRequest request, 
+            [FromQuery]GetFeaturedProductsRequest request, 
             CancellationToken cancellationToken)
         {
             return SendAsync(request, cancellationToken);
