@@ -14,7 +14,10 @@ namespace MMTShop.Shared
         public DataAccess()
         {
             selectQueryCommands
-                .Add(DataConstants.GetFeaturedProducts, "EXEC dbo.usp_GetFeaturedProducts");
+                .Add(DataConstants.GetFeaturedProducts, "EXEC [dbo].[usp_GetFeaturedProducts]");
+            
+            selectQueryCommands
+                .Add(DataConstants.GetCategories, "EXEC [dbo].[Usp_GetCategories]");
         }
 
         
