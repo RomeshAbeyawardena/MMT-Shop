@@ -19,7 +19,8 @@ namespace MMTShop.Server.Base
         {
             if(ModelState.IsValid)
             { 
-                return Ok(await Mediator.Send(request, cancellationToken));
+                return Ok(await Mediator
+                    .Send(request, cancellationToken));
             }
 
             return BadRequest(ModelState);

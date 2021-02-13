@@ -7,7 +7,7 @@ using System.Data;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace MMTShop.Server.Features.Categories.GetCategories
+namespace MMTShop.Server.Features.Category.GetCategories
 {
     public class GetCategoriesHandler 
         : DbRequestHandlerBase<GetCategoriesRequest, GetCategoriesResponse>
@@ -17,7 +17,7 @@ namespace MMTShop.Server.Features.Categories.GetCategories
             CancellationToken cancellationToken)
         {
             var categories = await DbConnection
-                .QueryAsync<Category>(DataAccess
+                .QueryAsync<Shared.Models.Category>(DataAccess
                     .GetCommand(DataConstants.GetCategories));
 
             return new GetCategoriesResponse { Categories = categories };

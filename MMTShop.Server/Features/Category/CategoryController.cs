@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MMTShop.Server.Base;
-using MMTShop.Server.Features.Categories.GetCategories;
+using MMTShop.Server.Features.Category.GetCategories;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace MMTShop.Server.Features.Categories
+namespace MMTShop.Server.Features.Category
 {
     public class CategoryController : MediatrControllerBase
     {
