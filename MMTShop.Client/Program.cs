@@ -25,13 +25,20 @@ namespace MMTShop.Client
             
             while(isRunning)
             {
-                Console
-                    .WriteLine(
-                    "Welcome to MMT Shop.{0}Please select an option{0}", 
-                    newLine);
+                try
+                {
+                    Console
+                        .WriteLine(
+                        "Welcome to MMT Shop.{0}Please select an option{0}", 
+                        newLine);
 
-                DisplayOptions();
-                await ParseInput(Console.ReadKey(true).KeyChar);
+                    DisplayOptions();
+                    await ParseInput(Console.ReadKey(true).KeyChar);
+                }
+                catch(InvalidOperationException exception)
+                {
+                    Console.WriteLine(exception.Message);
+                }
             }
 
             Console.WriteLine("GoodBye!");

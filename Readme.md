@@ -20,11 +20,11 @@ The project is structured in three main projects to keep the solution
 as simple as possible.
 - MMTShop.Client
     - The console application is implemented here using the RestSharp library 
-      as to implement the HTTPClient to interact with the API. 
+      as a means to consume a HTTPClient to interact with the API. 
 - MMTShop.Server
     - The API itself is implemented here, using Mediatr to 'glue' together 
-      request and response objects following the Mediator pattern and 
-      pipelines along with some FluentValidation to keep 
+      request and response object behaviours following the Mediator 
+      pattern and pipelines along with some FluentValidation to keep 
       dependency injection in classes to a minimum.
 - MMTShop.Shared
     - Shared domain models and constants are housed here to keep things 
