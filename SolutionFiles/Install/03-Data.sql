@@ -1,3 +1,4 @@
+USE MMTShop
 
 INSERT INTO [dbo].[Category]
     (

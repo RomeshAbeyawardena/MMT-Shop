@@ -1,3 +1,4 @@
+USE MMTShop
 
 -- =============================================
 -- Author:      Anthony Romesh Abeyawardena
@@ -75,20 +76,29 @@ GO
 --				current promotion.
 -- =============================================
 CREATE PROC [dbo].[usp_GetFeaturedProducts]
+	 @validFrom DATETIME = NULL
+    ,@validTo DATETIME = NULL
 AS BEGIN
 	DECLARE @promotionId INT = NULL
 
 	DECLARE @dateNow DATETIME = SYSDATETIME()
-	-- Get last current promotion
-	IF @promotionId IS NULL
+	IF @validFrom IS NULL 
 	BEGIN
-		SELECT TOP(1) @promotionId = [Id] 
-		FROM [dbo].[Promotion]
-		WHERE [ValidFrom] <= @dateNow 
-			AND ([ValidTo] IS NULL 
-			OR [ValidTo] >= @dateNow)
-		ORDER BY [ValidTo] DESC
+		SET @validFrom = @dateNow
 	END
+
+	IF @validTo = NULL
+	BEGIN
+		SET @validTo = @dateNow
+	END
+    
+	-- Get last current promotion
+	SELECT TOP(1) @promotionId = [Id] 
+	FROM [dbo].[Promotion]
+	WHERE [ValidFrom] <= @validFrom 
+		AND ([ValidTo] IS NULL 
+		OR [ValidTo] >= @validTo)
+	ORDER BY [ValidTo] DESC
 
 	IF @promotionId IS NULL	
 		THROW 
