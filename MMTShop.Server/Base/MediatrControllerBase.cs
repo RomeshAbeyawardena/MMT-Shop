@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,7 @@ namespace MMTShop.Server.Base
     [ApiController, Route("[controller]")]
     public class MediatrControllerBase : ControllerBase
     {
-        [Inject] public IMediator Mediator { get; private set; }
+        public IMediator Mediator => HttpContext.RequestServices.GetRequiredService<IMediator>();
 
         public async Task<IActionResult> SendAsync(
             object request, 
@@ -22,5 +23,6 @@ namespace MMTShop.Server.Base
         {
             return Ok(await Mediator.Send(request, cancellationToken));
         }
+
     }
 }

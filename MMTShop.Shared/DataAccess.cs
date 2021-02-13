@@ -13,11 +13,12 @@ namespace MMTShop.Shared
     {
         public DataAccess()
         {
-            selectQueryCommands
-                .Add(DataConstants.GetFeaturedProducts, "EXEC [dbo].[usp_GetFeaturedProducts]");
-            
-            selectQueryCommands
-                .Add(DataConstants.GetCategories, "EXEC [dbo].[Usp_GetCategories]");
+            selectQueryCommands = new Dictionary<string, string>
+            {
+                { DataConstants.GetFeaturedProducts, "EXEC [dbo].[usp_GetFeaturedProducts]" },
+
+                { DataConstants.GetCategories, "EXEC [dbo].[Usp_GetCategories]" }
+            };
         }
 
         

@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -10,6 +12,7 @@ using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MMTShop.Shared;
+using MMTShop.Shared.Contracts;
 
 namespace MMTShop.Server
 {
@@ -20,6 +23,8 @@ namespace MMTShop.Server
         public void ConfigureServices(IServiceCollection services)
         {
             services
+                .AddMediatR(typeof(Startup).Assembly)
+                .AddSingleton<IDataAccess, DataAccess>()
                 .AddSingleton<ApplicationSettings>()
                 .AddScoped(ConfigureDbConnection)
                 .AddControllers();
@@ -51,8 +56,12 @@ namespace MMTShop.Server
             var applicationSettings = serviceProvider
                 .GetRequiredService<ApplicationSettings>();
 
-            return new SqlConnection(applicationSettings
+            var sqlConnection = new SqlConnection(applicationSettings
                 .DefaultConnectionString);
+
+            sqlConnection.Open();
+
+            return sqlConnection;
         }
 
     }
