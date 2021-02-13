@@ -1,9 +1,6 @@
-﻿using Dapper;
-using MMTShop.Server.Base;
-using MMTShop.Shared.Constants;
+﻿using MMTShop.Server.Base;
 using MMTShop.Shared.Contracts;
 using MMTShop.Shared.Contracts.Provider;
-using MMTShop.Shared.Models;
 using System.Data;
 using System.Threading;
 using System.Threading.Tasks;

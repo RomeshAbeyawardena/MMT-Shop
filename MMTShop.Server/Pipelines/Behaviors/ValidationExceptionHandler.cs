@@ -1,21 +1,19 @@
-﻿using FluentValidation;
-using MediatR;
-using MediatR.Pipeline;
+﻿using MediatR.Pipeline;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace MMTShop.Server.Pipelines.Behaviors
 {
     public class ValidationExceptionHandler<TRequest, TResponse, TException>
-        : RequestExceptionHandler<TRequest, TResponse, TException>
-        where TRequest : IRequest<TResponse>
+        : IRequestExceptionHandler<TRequest, TResponse, TException>
         where TException : Exception
     {
-        protected override void Handle(TRequest request, TException exception, RequestExceptionHandlerState<TResponse> state)
+        public Task Handle(
+            TRequest request, 
+            TException exception, 
+            RequestExceptionHandlerState<TResponse> state, 
+            CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
         }

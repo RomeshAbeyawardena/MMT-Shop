@@ -49,4 +49,7 @@ sub-components as they both depend on the **Product** model.
 - GetFeaturedProducts
 - GetProductsByCategory
 
-Category can live on its own in a seperate feature
+Category can live on its own in a seperate feature, however I came across an
+exception to this and had to implement an ICategoryProvider in the server 
+project to enable my get products by category name validator and get 
+categories weren't using duplicate code.
