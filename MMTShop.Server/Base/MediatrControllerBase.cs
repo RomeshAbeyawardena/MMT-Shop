@@ -1,7 +1,9 @@
-﻿using MediatR;
+﻿using FluentValidation.Results;
+using MediatR;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -28,13 +30,25 @@ namespace MMTShop.Server.Base
 
             if(response is ResponseBase responseBase)
             {
-                if (responseBase.Errors !=null && responseBase.Errors.Any())
+                if (responseBase.Errors !=null 
+                    && responseBase.Errors.Any())
                 {
                     return BadRequest(responseBase.Errors);
                 }
             }
 
             return Ok(response);
+        }
+
+        protected IActionResult BadRequest(IEnumerable<ValidationFailure> validationFailures)
+        {
+            foreach(var validationFailure in validationFailures)
+            {
+                ModelState
+                    .AddModelError(validationFailure.PropertyName, validationFailure.ErrorMessage);
+            }
+
+            return BadRequest(ModelState);
         }
 
     }
