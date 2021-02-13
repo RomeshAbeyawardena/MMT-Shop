@@ -12,7 +12,10 @@ namespace MMTShop.Server.Features.Product
 {
     public class ProductController : MediatrControllerBase
     {
-        public Task<IActionResult> GetFeaturedProducts([FromQuery]GetFeaturedProductRequest request, CancellationToken cancellationToken)
+        [HttpGet]
+        public Task<IActionResult> GetFeaturedProducts(
+            [FromQuery]GetFeaturedProductRequest request, 
+            CancellationToken cancellationToken)
         {
             return SendAsync(request, cancellationToken);
         }
