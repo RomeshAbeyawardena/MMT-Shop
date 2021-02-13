@@ -1,36 +1,32 @@
-﻿using Dapper;
-using MMTShop.Server.Base;
-using MMTShop.Shared.Constants;
-using MMTShop.Shared.Contracts;
+﻿using MediatR;
+using MMTShop.Shared.Contracts.Repository;
 using MMTShop.Shared.Responses;
-using System.Data;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace MMTShop.Server.Features.Product.GetProductsByCategory
 {
     public class GetProductsByCategoryHandler
-        : DbRequestHandlerBase<GetProductsByCategoryRequest, ProductResponse>
+        : IRequestHandler<GetProductsByCategoryRequest, ProductResponse>
     {
-        public override async Task<ProductResponse> Handle(
+        public async Task<ProductResponse> Handle(
             GetProductsByCategoryRequest request, 
             CancellationToken cancellationToken)
         {
-            var products = await DbConnection
-                .QueryAsync<Shared.Models.Product>(DataAccess
-                    .GetCommand(DataConstants.GetProductsByCategoryName, 
-                        new { categoryName = request.Category }));
+            var products = await productRepository
+                .GetProductsAsync(
+                request.Category, 
+                cancellationToken);
             
             return new ProductResponse { Products = products };
         }
 
         public GetProductsByCategoryHandler(
-            IDbConnection dbConnection, 
-            IDatabaseQueryProvider dataAccess) 
-            : base(dbConnection, 
-                   dataAccess)
+            IProductRepository productRepository) 
         {
+            this.productRepository = productRepository;
         }
 
+        private readonly IProductRepository productRepository;
     }
 }

@@ -1,36 +1,35 @@
-﻿using Dapper;
-using MMTShop.Server.Base;
-using MMTShop.Shared.Constants;
-using MMTShop.Shared.Contracts;
+﻿using MediatR;
+using Microsoft.AspNetCore.Authentication;
+using MMTShop.Shared.Contracts.Repository;
 using MMTShop.Shared.Responses;
-using System.Data;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace MMTShop.Server.Features.Product.GetFeaturedProducts
 {
     public class GetFeaturedProductsHandler 
-        : DbRequestHandlerBase<GetFeaturedProductsRequest, ProductResponse>
+        : IRequestHandler<GetFeaturedProductsRequest, ProductResponse>
     {
-        public override async Task<ProductResponse> Handle(
+        public async Task<ProductResponse> Handle(
             GetFeaturedProductsRequest request, 
             CancellationToken cancellationToken)
         {
-            var products = await DbConnection
-                .QueryAsync<Shared.Models.Product>(DataAccess
-                    .GetCommand(DataConstants.GetFeaturedProducts));
+            var timeNow = systemClock.UtcNow;
+            var products = await productRepository
+                .GetFeaturedProductsAsync(timeNow.DateTime, timeNow.DateTime, cancellationToken);
 
             return new ProductResponse { Products = products };
         }
 
         public GetFeaturedProductsHandler(
-            IDbConnection dbConnection,
-            IDatabaseQueryProvider dataAccess)
-            : base(dbConnection, 
-                   dataAccess)
+            IProductRepository productRepository,
+            ISystemClock systemClock)
         {
-            
+            this.productRepository = productRepository;
+            this.systemClock = systemClock;
         }
 
+        private readonly IProductRepository productRepository;
+        private readonly ISystemClock systemClock;
     }
 }

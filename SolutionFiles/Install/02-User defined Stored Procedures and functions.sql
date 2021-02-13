@@ -1,5 +1,5 @@
 USE MMTShop
-
+GO
 -- =============================================
 -- Author:      Anthony Romesh Abeyawardena
 -- Create date: 14/02/2021

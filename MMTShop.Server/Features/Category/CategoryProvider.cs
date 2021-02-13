@@ -1,10 +1,6 @@
-﻿using Dapper;
-using MMTShop.Shared.Constants;
-using MMTShop.Shared.Contracts;
-using MMTShop.Shared.Contracts.Provider;
-using MMTShop.Shared.Models;
+﻿using MMTShop.Shared.Contracts.Provider;
+using MMTShop.Shared.Contracts.Repository;
 using System.Collections.Generic;
-using System.Data;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -15,21 +11,17 @@ namespace MMTShop.Server.Features.Category
         public async Task<IEnumerable<Shared.Models.Category>> GetCategories(
             CancellationToken cancellationToken)
         {
-            return await dbConnection
-                .QueryAsync<Shared.Models.Category>(dataAccess
-                    .GetCommand(DataConstants.GetCategories));
+            return await categoryRepository
+                .GetCategoriesAsync(cancellationToken);
 
         }
 
         public CategoryProvider( 
-            IDbConnection dbConnection,
-            IDatabaseQueryProvider dataAccess)
+            ICategoryRepository categoryRepository)
         {
-            this.dbConnection = dbConnection;
-            this.dataAccess = dataAccess;
+            this.categoryRepository = categoryRepository;
         }
 
-        private readonly IDbConnection dbConnection;
-        private readonly IDatabaseQueryProvider dataAccess;
+        private readonly ICategoryRepository categoryRepository;
     }
 }

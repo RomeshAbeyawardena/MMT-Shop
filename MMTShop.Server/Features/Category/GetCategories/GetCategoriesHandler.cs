@@ -1,17 +1,15 @@
-﻿using MMTShop.Server.Base;
-using MMTShop.Shared.Contracts;
+﻿using MediatR;
 using MMTShop.Shared.Contracts.Provider;
 using MMTShop.Shared.Responses;
-using System.Data;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace MMTShop.Server.Features.Category.GetCategories
 {
     public class GetCategoriesHandler 
-        : DbRequestHandlerBase<GetCategoriesRequest, CategoryResponse>
+        : IRequestHandler<GetCategoriesRequest, CategoryResponse>
     {
-        public override async Task<CategoryResponse> Handle(
+        public async Task<CategoryResponse> Handle(
             GetCategoriesRequest request, 
             CancellationToken cancellationToken)
         {
@@ -22,11 +20,7 @@ namespace MMTShop.Server.Features.Category.GetCategories
         }
 
         public GetCategoriesHandler(
-            IDbConnection dbConnection,
-            IDatabaseQueryProvider dataAccess,
             ICategoryProvider categoryProvider)
-            : base (dbConnection,
-                    dataAccess)
         {
             this.categoryProvider = categoryProvider;
         }

@@ -2,6 +2,7 @@ using System;
 using System.Data;
 using FluentValidation;
 using MediatR;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -10,10 +11,12 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MMTShop.Server.Factories;
 using MMTShop.Server.Features.Category;
+using MMTShop.Server.Features.Product;
 using MMTShop.Server.Pipelines.Behaviors;
 using MMTShop.Shared;
 using MMTShop.Shared.Contracts;
 using MMTShop.Shared.Contracts.Provider;
+using MMTShop.Shared.Contracts.Repository;
 
 namespace MMTShop.Server
 {
@@ -30,10 +33,13 @@ namespace MMTShop.Server
                 .AddMediatR(currentAssembly)
                 .AddSingleton<IDatabaseQueryProvider, DatabaseQueryProvider>()
                 .AddSingleton<ApplicationSettings>()
+                .AddSingleton<ISystemClock, SystemClock>()
                 .AddScoped<IValidatorFactory, DefaultValidatorFactory>()
                 .AddScoped<ICategoryProvider, CategoryProvider>()
-                .AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidateRequestRequestPreProcessor<,>))
+                .AddScoped<IProductRepository, ProductRepository>()
+                .AddScoped<ICategoryRepository, CategoryRepository>()
                 .AddScoped(ConfigureDbConnection)
+                .AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidateRequestRequestPreProcessor<,>))
                 .AddLogging()
                 .AddControllers();
         }
