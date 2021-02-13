@@ -9,6 +9,7 @@ using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MMTShop.Server.Factories;
+using MMTShop.Server.Pipelines.Behaviors;
 using MMTShop.Server.Providers;
 using MMTShop.Shared;
 using MMTShop.Shared.Contracts;
@@ -31,7 +32,9 @@ namespace MMTShop.Server
                 .AddSingleton<ApplicationSettings>()
                 .AddScoped<IValidatorFactory, DefaultValidatorFactory>()
                 .AddScoped<ICategoryProvider, CategoryProvider>()
+                .AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidateRequestRequestPreProcessor<,>))
                 .AddScoped(ConfigureDbConnection)
+                .AddLogging()
                 .AddControllers();
         }
 

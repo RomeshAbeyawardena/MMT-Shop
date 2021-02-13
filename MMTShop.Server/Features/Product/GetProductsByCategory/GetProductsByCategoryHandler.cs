@@ -19,7 +19,7 @@ namespace MMTShop.Server.Features.Product.GetProductsByCategory
                 .QueryAsync<Shared.Models.Product>(DataAccess
                     .GetCommand(DataConstants.GetProductsByCategoryName, 
                         new { categoryName = request.Category }));
-
+            
             return new GetProductsByCategoryResponse { Products = products };
         }
 
