@@ -1,4 +1,4 @@
-# MMTShop
+# MMT Shop
 
 ## Database Installation
 

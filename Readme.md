@@ -1,7 +1,7 @@
 # MMT Shop
 
 ## Database Installation
-See Readne.md in Install sub-directory
+See Readme.md in Install sub-directory
 
 ## Application Setup
 
@@ -62,7 +62,25 @@ A further enhancement would be to cache the categories using a form of
 distributed cache to reduce the resources used to constantly connect
 to the database each time, however I did not get time to implement this
 
+---
+
 ## MMT Server
+
+### List of endpoints
+
+- Get featured products part of the current promotion
+
+*HTTP GET* `http://localhost:5000/product`
+
+- Get all available categories
+
+*HTTP GET* `http://localhost:5000/category`
+
+- Get all products under a particular category (replace home with any valid category name)
+
+*HTTP GET* `http://localhost:5000/product/home`
+
+---
 
 ## MMT Client
 
