@@ -1,5 +1,6 @@
 using System;
 using System.Data;
+using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -7,8 +8,11 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MMTShop.Server.Factories;
+using MMTShop.Server.Providers;
 using MMTShop.Shared;
 using MMTShop.Shared.Contracts;
+using MMTShop.Shared.Contracts.Provider;
 
 namespace MMTShop.Server
 {
@@ -18,10 +22,15 @@ namespace MMTShop.Server
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            var currentAssembly = typeof(Startup).Assembly;
+
             services
-                .AddMediatR(typeof(Startup).Assembly)
+                .AddValidatorsFromAssembly(currentAssembly)
+                .AddMediatR(currentAssembly)
                 .AddSingleton<IDataAccess, DataAccess>()
                 .AddSingleton<ApplicationSettings>()
+                .AddScoped<IValidatorFactory, DefaultValidatorFactory>()
+                .AddScoped<ICategoryProvider, CategoryProvider>()
                 .AddScoped(ConfigureDbConnection)
                 .AddControllers();
         }

@@ -2,6 +2,7 @@
 using MMTShop.Server.Base;
 using MMTShop.Shared.Constants;
 using MMTShop.Shared.Contracts;
+using MMTShop.Shared.Contracts.Provider;
 using MMTShop.Shared.Models;
 using System.Data;
 using System.Threading;
@@ -16,21 +17,22 @@ namespace MMTShop.Server.Features.Category.GetCategories
             GetCategoriesRequest request, 
             CancellationToken cancellationToken)
         {
-            var categories = await DbConnection
-                .QueryAsync<Shared.Models.Category>(DataAccess
-                    .GetCommand(DataConstants.GetCategories));
+            var categories = await categoryProvider
+                .GetCategories(cancellationToken);
 
             return new GetCategoriesResponse { Categories = categories };
         }
 
         public GetCategoriesHandler(
             IDbConnection dbConnection,
-            IDataAccess dataAccess)
+            IDataAccess dataAccess,
+            ICategoryProvider categoryProvider)
             : base (dbConnection,
                     dataAccess)
         {
-            
+            this.categoryProvider = categoryProvider;
         }
 
+        private readonly ICategoryProvider categoryProvider;
     }
 }
