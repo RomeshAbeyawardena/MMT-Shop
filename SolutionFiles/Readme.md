@@ -9,4 +9,4 @@ directory in the following order:
 2. 02-User defined Stored Procedures and functions.sql
 3. 03-Data.sql
 
-If you need to carry out a clear-down operation uncomment lines 3 to 9 first.
+If you need to carry out a clear-down operation, uncomment lines 3 to 9 first.
