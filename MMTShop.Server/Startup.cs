@@ -10,15 +10,10 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using MMTShop.Server.Factories;
-using MMTShop.Server.Features.Category;
-using MMTShop.Server.Features.Product;
 using MMTShop.Server.Pipelines.Behaviors;
 using MMTShop.Shared;
 using MMTShop.Shared.Constants;
 using MMTShop.Shared.Contracts;
-using MMTShop.Shared.Contracts.Provider;
-using MMTShop.Shared.Contracts.Repository;
 
 namespace MMTShop.Server
 {

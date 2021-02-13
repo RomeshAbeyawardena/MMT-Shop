@@ -11,5 +11,6 @@ namespace MMTShop.Shared
         }
 
         public string DefaultConnectionString { get; set; }
+        public string BaseUrl { get; set; }
     }
 }

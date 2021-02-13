@@ -11,6 +11,10 @@ order to prevent sharing sensitive credentials in GitHub
 and this needs to be configured correctly in order for the
 MMTShop Server infrastructure to work. 
 
+As long as the connection string is valid and the schema and 
+stored procedures are setup, the application should run without
+a hitch.
+
 Visit
 [Safe storage of app secrets in development in ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/security/app-secrets?view=aspnetcore-5.0&tabs=windows)
 for more information.
@@ -61,6 +65,7 @@ response objects to reduce effort when requirements change.
 A further enhancement would be to cache the categories using a form of
 distributed cache to reduce the resources used to constantly connect
 to the database each time, however I did not get time to implement this
+feature.
 
 ---
 

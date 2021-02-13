@@ -1,7 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using MMTShop.Client.Features.Category;
-using MMTShop.Client.Features.Product;
-using MMTShop.Shared.Constants;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using MMTShop.Shared;
 using MMTShop.Shared.Contracts.Provider;
 using MMTShop.Shared.Models;
 using RestSharp;
@@ -21,7 +20,7 @@ namespace MMTShop.Client
             //this could be further enhanced so the base url could come from 
             //an app settings file instead of a constant.
 
-            Initialize(HttpClientConstants.BaseUrl);
+            Initialize(null);
             
             while(isRunning)
             {
@@ -34,6 +33,8 @@ namespace MMTShop.Client
 
                     DisplayOptions();
                     await ParseInput(Console.ReadKey(true).KeyChar);
+
+                    WaitForInput();
                 }
                 catch(InvalidOperationException exception)
                 {
@@ -45,12 +46,20 @@ namespace MMTShop.Client
         }
 
         #region Methods
+
+        #region Setup
         private static IServiceCollection RegisterServices(
             IServiceCollection services,
             string baseUrl)
         {
             return services
-                .AddScoped<IRestClient>((s) => new RestClient(baseUrl))
+                .AddSingleton<IConfiguration>((s) => new ConfigurationBuilder()
+                    .AddJsonFile("appsettings.json")
+                    .Build())
+                .AddSingleton<ApplicationSettings>()
+                .AddScoped<IRestClient>((s) => new RestClient(baseUrl 
+                ?? s.GetRequiredService<ApplicationSettings>()
+                    .BaseUrl))
                 .Scan(sourceSelector => sourceSelector
                     .FromAssemblyOf<Program>()
                     .AddClasses(c => c.Where(type => type.Name.EndsWith("Provider")))
@@ -75,6 +84,13 @@ namespace MMTShop.Client
                 { 2, GetCategories }
             };
         }
+        #endregion
+        
+        private static void WaitForInput()
+        {
+            Console.WriteLine("Press any key to continue");
+            Console.ReadKey(true);
+        }
 
         private static async Task GetFeaturedProducts()
         {
@@ -84,7 +100,6 @@ namespace MMTShop.Client
             DisplayProducts(products);
         }
 
-        
         private static async Task GetCategories()
         {
             var categoryProvider = services
