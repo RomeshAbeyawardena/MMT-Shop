@@ -32,6 +32,7 @@ namespace MMTShop.Client
                         newLine);
 
                     DisplayOptions();
+
                     if(await ParseInput(Console.ReadKey(true).KeyChar))
                     { 
                         WaitForInput();
@@ -79,29 +80,38 @@ namespace MMTShop.Client
                 baseUrl)
                 .BuildServiceProvider();
 
-            actionDictionary = new Dictionary<int, Func<Task>>
+            actionDictionary = new Dictionary<char, Func<Task<bool>>>
             {
-                { 1, GetFeaturedProducts },
-                { 2, GetCategories }
+                { '1', GetFeaturedProducts },
+                { '2', GetCategories },
+                { 'q', Quit }
             };
         }
+
         #endregion
-        
+
         private static void WaitForInput()
         {
             Console.WriteLine("Press any key to continue");
             Console.ReadKey(true);
         }
+        
+        private static Task<bool> Quit()
+        {
+            isRunning = false;
+            return Task.FromResult(false);
+        }
 
-        private static async Task GetFeaturedProducts()
+        private static async Task<bool> GetFeaturedProducts()
         {
             var products = await ProductProvider
                 .GetFeaturedProductsAsync(CancellationToken.None);
 
             DisplayProducts(products);
+            return true;
         }
 
-        private static async Task GetCategories()
+        private static async Task<bool> GetCategories()
         {
             var categoryProvider = services
                 .GetRequiredService<ICategoryProvider>();
@@ -120,13 +130,15 @@ namespace MMTShop.Client
                         StringComparison.InvariantCultureIgnoreCase)))
                 { 
                     await GetProductsByCategory(categoryName);
-                    return;
+                    return true;
                 }
 
-                Console.WriteLine("Invalid category");
+                Console.WriteLine("Invalid category selected");
             }
 
             Console.WriteLine("No category selected");
+
+            return true;
         }
 
         private static async Task GetProductsByCategory(
@@ -150,36 +162,14 @@ namespace MMTShop.Client
         private static async Task<bool> ParseInput(
             char input)
         {
-            var strInput = input.ToString();
-
             const string InvalidOptionExceptionMessage = "Input must be a number between 1-2 or q to quit";
-            if (string.IsNullOrEmpty(strInput))
-            {
-                throw new InvalidOperationException("Input required");
-            }
 
-            if(strInput.Equals("q", 
-                    StringComparison.InvariantCultureIgnoreCase))
-            {
-                isRunning = false;
-                return false;
-            }
-
-            if(!int.TryParse(strInput, out var result))
+            if(!actionDictionary.TryGetValue(input, out var action))
             {
                 throw new InvalidOperationException(InvalidOptionExceptionMessage);
             }
 
-            actionDictionary.TryGetValue(result, out var action);
-
-            if(action == null)
-            {
-                throw new InvalidOperationException(InvalidOptionExceptionMessage);
-            }
-
-            await action.Invoke();
-
-            return true;
+            return await action.Invoke();
         }
 
         private static void DisplayProducts(
@@ -236,7 +226,7 @@ namespace MMTShop.Client
         #endregion
 
         #region Fields
-        static Dictionary<int, Func<Task>> actionDictionary;
+        static Dictionary<char, Func<Task<bool>>> actionDictionary;
         static bool isRunning = false;
         static readonly string newLine = Environment.NewLine;
         static IServiceProvider services;
