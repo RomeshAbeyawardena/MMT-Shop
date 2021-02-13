@@ -23,7 +23,7 @@ namespace MMTShop.Server.Features.Category.GetCategories
 
         public GetCategoriesHandler(
             IDbConnection dbConnection,
-            IDataAccess dataAccess,
+            IDatabaseQueryProvider dataAccess,
             ICategoryProvider categoryProvider)
             : base (dbConnection,
                     dataAccess)

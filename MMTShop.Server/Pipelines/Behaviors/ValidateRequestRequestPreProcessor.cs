@@ -9,7 +9,10 @@ namespace MMTShop.Server.Pipelines.Behaviors
         : IPipelineBehavior<TRequest, TResponse>
         where TRequest : IRequest<TResponse>
     {
-        public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate<TResponse> next)
+        public async Task<TResponse> Handle(
+            TRequest request, 
+            CancellationToken cancellationToken, 
+            RequestHandlerDelegate<TResponse> next)
         {
             var validator = validatorFactory.GetValidator<TRequest>();
 

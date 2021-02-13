@@ -15,7 +15,7 @@ namespace MMTShop.Server.Base
     [ApiController, Route("[controller]")]
     public class MediatrControllerBase : ControllerBase
     {
-        public IMediator Mediator => HttpContext.RequestServices.GetRequiredService<IMediator>();
+        protected IMediator Mediator => HttpContext.RequestServices.GetRequiredService<IMediator>();
 
         public async Task<IActionResult> SendAsync(
             object request, 
@@ -41,7 +41,8 @@ namespace MMTShop.Server.Base
             return Ok(response);
         }
 
-        protected IActionResult BadRequest(IEnumerable<ValidationFailure> validationFailures)
+        protected IActionResult BadRequest(
+            IEnumerable<ValidationFailure> validationFailures)
         {
             foreach(var validationFailure in validationFailures)
             {

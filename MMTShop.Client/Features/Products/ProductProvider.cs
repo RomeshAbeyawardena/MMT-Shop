@@ -12,7 +12,8 @@ namespace MMTShop.Client.Features.Products
 {
     public class ProductProvider : ProviderBase, IProductProvider
     {
-        public async Task<IEnumerable<Product>> GetFeaturedProductsAsync(CancellationToken cancellationToken)
+        public async Task<IEnumerable<Product>> GetFeaturedProductsAsync(
+            CancellationToken cancellationToken)
         {
             var request = new RestRequest(
                 HttpClientConstants.GetProductsUrl);
@@ -23,7 +24,9 @@ namespace MMTShop.Client.Features.Products
             return response.Products;
         }
 
-        public async Task<IEnumerable<Product>> GetProductsByCategoryName(string categoryName, CancellationToken cancellationToken)
+        public async Task<IEnumerable<Product>> GetProductsByCategoryName(
+            string categoryName, 
+            CancellationToken cancellationToken)
         {
             var request = new RestRequest(
                 $"{HttpClientConstants.GetProductsUrl}/{categoryName}");

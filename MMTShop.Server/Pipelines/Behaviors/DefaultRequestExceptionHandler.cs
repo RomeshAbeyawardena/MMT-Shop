@@ -7,11 +7,12 @@ using System.Threading.Tasks;
 
 namespace MMTShop.Server.Pipelines.Behaviors
 {
-    public class RequestExceptionHandler<TRequest, TResponse, TException> 
+    public class DefaultRequestExceptionHandler<TRequest, TResponse, TException> 
         : IRequestExceptionHandler<TRequest, TResponse, TException>
         where TException : Exception        
     {
-        public RequestExceptionHandler(ILogger<TRequest> logger)
+        public DefaultRequestExceptionHandler(
+            ILogger<TRequest> logger)
         {
             this.logger = logger;
         }

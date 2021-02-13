@@ -5,9 +5,9 @@ using System.Collections.Generic;
 
 namespace MMTShop.Shared
 {
-    public class DataAccess : IDataAccess
+    public class DatabaseQueryProvider : IDatabaseQueryProvider
     {
-        public DataAccess()
+        public DatabaseQueryProvider()
         {
             selectQueryCommands = new Dictionary<string, string>
             {

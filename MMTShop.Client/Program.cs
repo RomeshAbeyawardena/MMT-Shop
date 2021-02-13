@@ -41,11 +41,12 @@ namespace MMTShop.Client
                 }
             }
 
-            Console.WriteLine("GoodBye!");
+            Console.WriteLine("Good Bye!");
         }
 
         #region Methods
-        private static void Initialize(string baseUrl)
+        private static void Initialize(
+            string baseUrl)
         {
             isRunning = true;
             var servicesCollection = new ServiceCollection();
@@ -100,7 +101,8 @@ namespace MMTShop.Client
             Console.WriteLine("No category selected");
         }
 
-        private static async Task GetProductsByCategory(string categoryName)
+        private static async Task GetProductsByCategory(
+            string categoryName)
         {
             var products = await ProductProvider
                 .GetProductsByCategoryName(
@@ -117,7 +119,8 @@ namespace MMTShop.Client
                 "q. Quit", newLine);
         }
 
-        private static async Task ParseInput(char input)
+        private static async Task ParseInput(
+            char input)
         {
             var strInput = input.ToString();
 
@@ -149,7 +152,8 @@ namespace MMTShop.Client
             await action.Invoke();
         }
 
-        private static void DisplayProducts(IEnumerable<Product> products)
+        private static void DisplayProducts(
+            IEnumerable<Product> products)
         {
             Display(products, "Product", product => 
                 string.Format("\tSku: {0}{4}" +
@@ -163,7 +167,8 @@ namespace MMTShop.Client
                     newLine));
         }
         
-        private static void DisplayCategories(IEnumerable<Category> categories)
+        private static void DisplayCategories(
+            IEnumerable<Category> categories)
         {
             Display(categories, "Category", product => 
                 string.Format("\tName: {0}{1}", 
@@ -171,7 +176,10 @@ namespace MMTShop.Client
                     newLine));
         }
 
-        private static void Display<T>(IEnumerable<T> items, string itemType, Func<T, string> itemDisplayFormat)
+        private static void Display<T>(
+            IEnumerable<T> items, 
+            string itemType, 
+            Func<T, string> itemDisplayFormat)
         {
             var productCount = items.Count();
             for(var productIndex = 0; productIndex < productCount; productIndex++)

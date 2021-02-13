@@ -25,7 +25,7 @@ namespace MMTShop.Server.Features.Product.GetFeaturedProducts
 
         public GetFeaturedProductsHandler(
             IDbConnection dbConnection,
-            IDataAccess dataAccess)
+            IDatabaseQueryProvider dataAccess)
             : base(dbConnection, 
                    dataAccess)
         {

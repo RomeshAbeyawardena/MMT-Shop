@@ -9,17 +9,19 @@ namespace MMTShop.Server.Base
     public abstract class DbRequestHandlerBase<TRequest, TResponse> : IRequestHandler<TRequest, TResponse>
         where TRequest : IRequest<TResponse>
     {
-        public abstract Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken);
+        public abstract Task<TResponse> Handle(
+            TRequest request, 
+            CancellationToken cancellationToken);
    
         protected DbRequestHandlerBase(
             IDbConnection dbConnection,
-            IDataAccess dataAccess)
+            IDatabaseQueryProvider dataAccess)
         {
             DbConnection = dbConnection;
             DataAccess = dataAccess;
         }
 
         protected IDbConnection DbConnection { get; }
-        protected IDataAccess DataAccess { get; }
+        protected IDatabaseQueryProvider DataAccess { get; }
     }
 }

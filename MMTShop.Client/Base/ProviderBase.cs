@@ -4,7 +4,8 @@ namespace MMTShop.Client.Base
 {
     public class ProviderBase
     {
-        public ProviderBase(IRestClient restClient)
+        public ProviderBase(
+            IRestClient restClient)
         {
             RestClient = restClient;
         }

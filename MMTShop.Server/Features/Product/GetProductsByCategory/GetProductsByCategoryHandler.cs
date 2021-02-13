@@ -26,7 +26,7 @@ namespace MMTShop.Server.Features.Product.GetProductsByCategory
 
         public GetProductsByCategoryHandler(
             IDbConnection dbConnection, 
-            IDataAccess dataAccess) 
+            IDatabaseQueryProvider dataAccess) 
             : base(dbConnection, 
                    dataAccess)
         {

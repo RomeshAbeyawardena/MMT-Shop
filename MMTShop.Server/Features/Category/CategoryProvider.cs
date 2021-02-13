@@ -12,7 +12,8 @@ namespace MMTShop.Server.Features.Category
 {
     public class CategoryProvider : ICategoryProvider
     {
-        public async Task<IEnumerable<Shared.Models.Category>> GetCategories(CancellationToken cancellationToken)
+        public async Task<IEnumerable<Shared.Models.Category>> GetCategories(
+            CancellationToken cancellationToken)
         {
             return await dbConnection
                 .QueryAsync<Shared.Models.Category>(dataAccess
@@ -22,13 +23,13 @@ namespace MMTShop.Server.Features.Category
 
         public CategoryProvider( 
             IDbConnection dbConnection,
-            IDataAccess dataAccess)
+            IDatabaseQueryProvider dataAccess)
         {
             this.dbConnection = dbConnection;
             this.dataAccess = dataAccess;
         }
 
         private readonly IDbConnection dbConnection;
-        private readonly IDataAccess dataAccess;
+        private readonly IDatabaseQueryProvider dataAccess;
     }
 }

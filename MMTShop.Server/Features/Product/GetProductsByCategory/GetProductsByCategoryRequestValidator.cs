@@ -18,7 +18,10 @@ namespace MMTShop.Server.Features.Product.GetProductsByCategory
             this.categoryProvider = categoryProvider;
         }
 
-        private async Task EnsureCategoryIsValid(string categoryName, CustomContext context, CancellationToken cancellationToken)
+        private async Task EnsureCategoryIsValid(
+            string categoryName, 
+            CustomContext context, 
+            CancellationToken cancellationToken)
         {
             var categories = await categoryProvider.GetCategories(cancellationToken);
 

@@ -28,7 +28,7 @@ namespace MMTShop.Server
             services
                 .AddValidatorsFromAssembly(currentAssembly)
                 .AddMediatR(currentAssembly)
-                .AddSingleton<IDataAccess, DataAccess>()
+                .AddSingleton<IDatabaseQueryProvider, DatabaseQueryProvider>()
                 .AddSingleton<ApplicationSettings>()
                 .AddScoped<IValidatorFactory, DefaultValidatorFactory>()
                 .AddScoped<ICategoryProvider, CategoryProvider>()
@@ -53,7 +53,7 @@ namespace MMTShop.Server
                 endpoints.MapControllers();
                 endpoints.MapGet("/", async context =>
                 {
-                    await context.Response.WriteAsync("Welcome to MMT Shop");
+                    await context.Response.WriteAsync("MMT Shop Server");
                 });
             });
         }

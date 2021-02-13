@@ -2,7 +2,7 @@
 
 namespace MMTShop.Shared.Contracts
 {
-    public interface IDataAccess
+    public interface IDatabaseQueryProvider
     {
         CommandDefinition GetCommand(string key, object parameters = null);
     }
