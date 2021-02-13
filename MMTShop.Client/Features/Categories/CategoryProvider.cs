@@ -2,6 +2,7 @@
 using MMTShop.Shared.Constants;
 using MMTShop.Shared.Contracts.Provider;
 using MMTShop.Shared.Models;
+using MMTShop.Shared.Responses;
 using RestSharp;
 using System.Collections.Generic;
 using System.Threading;

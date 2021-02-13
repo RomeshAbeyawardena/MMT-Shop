@@ -1,6 +1,7 @@
 ﻿using MMTShop.Server.Base;
 using MMTShop.Shared.Contracts;
 using MMTShop.Shared.Contracts.Provider;
+using MMTShop.Shared.Responses;
 using System.Data;
 using System.Threading;
 using System.Threading.Tasks;
@@ -8,16 +9,16 @@ using System.Threading.Tasks;
 namespace MMTShop.Server.Features.Category.GetCategories
 {
     public class GetCategoriesHandler 
-        : DbRequestHandlerBase<GetCategoriesRequest, GetCategoriesResponse>
+        : DbRequestHandlerBase<GetCategoriesRequest, CategoryResponse>
     {
-        public override async Task<GetCategoriesResponse> Handle(
+        public override async Task<CategoryResponse> Handle(
             GetCategoriesRequest request, 
             CancellationToken cancellationToken)
         {
             var categories = await categoryProvider
                 .GetCategories(cancellationToken);
 
-            return new GetCategoriesResponse { Categories = categories };
+            return new CategoryResponse { Categories = categories };
         }
 
         public GetCategoriesHandler(

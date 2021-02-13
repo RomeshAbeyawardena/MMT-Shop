@@ -8,14 +8,14 @@ using System.Data;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace MMTShop.Server.Providers
+namespace MMTShop.Server.Features.Category
 {
     public class CategoryProvider : ICategoryProvider
     {
-        public async Task<IEnumerable<Category>> GetCategories(CancellationToken cancellationToken)
+        public async Task<IEnumerable<Shared.Models.Category>> GetCategories(CancellationToken cancellationToken)
         {
             return await dbConnection
-                .QueryAsync<Category>(dataAccess
+                .QueryAsync<Shared.Models.Category>(dataAccess
                     .GetCommand(DataConstants.GetCategories));
 
         }

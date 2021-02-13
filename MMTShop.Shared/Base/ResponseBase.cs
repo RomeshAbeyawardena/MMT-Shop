@@ -1,11 +1,7 @@
 ﻿using FluentValidation.Results;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace MMTShop.Server.Base
+namespace MMTShop.Shared.Base
 {
     public class ResponseBase
     {
