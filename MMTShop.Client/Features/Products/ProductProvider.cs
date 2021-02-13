@@ -1,4 +1,5 @@
-﻿using MMTShop.Shared.Constants;
+﻿using MMTShop.Client.Base;
+using MMTShop.Shared.Constants;
 using MMTShop.Shared.Contracts.Provider;
 using MMTShop.Shared.Models;
 using RestSharp;
@@ -11,17 +12,17 @@ using System.Threading.Tasks;
 
 namespace MMTShop.Client.Features.Products
 {
-    public class ProductProvider : IProductProvider
+    public class ProductProvider : ProviderBase, IProductProvider
     {
         public async Task<IEnumerable<Product>> GetFeaturedProductsAsync(CancellationToken cancellationToken)
         {
             var request = new RestRequest(
                 HttpClientConstants.GetProductsUrl);
 
-            var response = await restClient
-                .GetAsync<List<Product>>(request, cancellationToken);
+            var response = await RestClient
+                .GetAsync<ProductResponse>(request, cancellationToken);
 
-            return response.ToArray();
+            return response.Products;
         }
 
         public async Task<IEnumerable<Product>> GetProductsByCategoryName(string categoryName, CancellationToken cancellationToken)
@@ -29,17 +30,16 @@ namespace MMTShop.Client.Features.Products
             var request = new RestRequest(
                 $"{HttpClientConstants.GetProductsUrl}/{categoryName}");
 
-            var response = await restClient
+            var response = await RestClient
                 .GetAsync<List<Product>>(request, cancellationToken);
 
             return response;
         }
 
         public ProductProvider(IRestClient restClient)
+            : base(restClient)
         {
-            this.restClient = restClient;
         }
 
-        private readonly IRestClient restClient;
     }
 }
