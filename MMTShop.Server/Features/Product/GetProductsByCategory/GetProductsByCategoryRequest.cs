@@ -1,14 +1,11 @@
 ﻿using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
 namespace MMTShop.Server.Features.Product.GetProductsByCategory
 {
     public class GetProductsByCategoryRequest : IRequest<GetProductsByCategoryResponse>
     {
+        [Required]
         public string Category { get; set; }
     }
 }

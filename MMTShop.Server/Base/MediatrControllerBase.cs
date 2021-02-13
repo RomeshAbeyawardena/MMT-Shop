@@ -2,10 +2,6 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Route = Microsoft.AspNetCore.Mvc.RouteAttribute;
@@ -21,7 +17,12 @@ namespace MMTShop.Server.Base
             object request, 
             CancellationToken cancellationToken)
         {
-            return Ok(await Mediator.Send(request, cancellationToken));
+            if(ModelState.IsValid)
+            { 
+                return Ok(await Mediator.Send(request, cancellationToken));
+            }
+
+            return BadRequest(ModelState);
         }
 
     }

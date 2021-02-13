@@ -1,11 +1,7 @@
 ﻿using Dapper;
 using MMTShop.Shared.Constants;
 using MMTShop.Shared.Contracts;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MMTShop.Shared
 {
@@ -15,9 +11,9 @@ namespace MMTShop.Shared
         {
             selectQueryCommands = new Dictionary<string, string>
             {
+                { DataConstants.GetCategories, "EXEC [dbo].[usp_GetCategories]" },
                 { DataConstants.GetFeaturedProducts, "EXEC [dbo].[usp_GetFeaturedProducts]" },
-
-                { DataConstants.GetCategories, "EXEC [dbo].[Usp_GetCategories]" }
+                { DataConstants.GetProductsByCategoryName, "EXEC [dbo].[usp_GetProductsByCategory] @category = @categoryName " }
             };
         }
 
