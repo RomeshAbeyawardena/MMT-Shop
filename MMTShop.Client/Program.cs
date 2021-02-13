@@ -32,9 +32,10 @@ namespace MMTShop.Client
                         newLine);
 
                     DisplayOptions();
-                    await ParseInput(Console.ReadKey(true).KeyChar);
-
-                    WaitForInput();
+                    if(await ParseInput(Console.ReadKey(true).KeyChar))
+                    { 
+                        WaitForInput();
+                    }
                 }
                 catch(InvalidOperationException exception)
                 {
@@ -146,12 +147,12 @@ namespace MMTShop.Client
                 "q. Quit", newLine);
         }
 
-        private static async Task ParseInput(
+        private static async Task<bool> ParseInput(
             char input)
         {
             var strInput = input.ToString();
 
-            const string InvalidOptionExceptionMessage = "Input must be a number between 1-3 or q to quit";
+            const string InvalidOptionExceptionMessage = "Input must be a number between 1-2 or q to quit";
             if (string.IsNullOrEmpty(strInput))
             {
                 throw new InvalidOperationException("Input required");
@@ -161,7 +162,7 @@ namespace MMTShop.Client
                     StringComparison.InvariantCultureIgnoreCase))
             {
                 isRunning = false;
-                return;
+                return false;
             }
 
             if(!int.TryParse(strInput, out var result))
@@ -177,6 +178,8 @@ namespace MMTShop.Client
             }
 
             await action.Invoke();
+
+            return true;
         }
 
         private static void DisplayProducts(
