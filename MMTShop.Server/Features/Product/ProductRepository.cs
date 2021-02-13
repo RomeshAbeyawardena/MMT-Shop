@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using MMTShop.Server.Base;
 using MMTShop.Shared.Constants;
 using MMTShop.Shared.Contracts;
 using MMTShop.Shared.Contracts.Repository;
@@ -10,15 +11,15 @@ using System.Threading.Tasks;
 
 namespace MMTShop.Server.Features.Product
 {
-    public class ProductRepository : IProductRepository
+    public class ProductRepository : RepositoryBase, IProductRepository
     {
         public async Task<IEnumerable<Shared.Models.Product>> GetFeaturedProductsAsync(
             DateTime? promotionValidFrom, 
             DateTime? promotionValidTo, 
             CancellationToken cancellationToken)
         {
-            return await dbConnection
-                .QueryAsync<Shared.Models.Product>(databaseQueryProvider
+            return await DbConnection
+                .QueryAsync<Shared.Models.Product>(DatabaseQueryProvider
                     .GetCommand(DataConstants.GetFeaturedProducts, new {
                         promotionValidFrom,
                         promotionValidTo
@@ -29,8 +30,8 @@ namespace MMTShop.Server.Features.Product
             string categoryName, 
             CancellationToken cancellationToken)
         {
-             return await dbConnection
-                .QueryAsync<Shared.Models.Product>(databaseQueryProvider
+             return await DbConnection
+                .QueryAsync<Shared.Models.Product>(DatabaseQueryProvider
                     .GetCommand(DataConstants.GetProductsByCategoryName, 
                         new { categoryName }));
         }
@@ -38,12 +39,10 @@ namespace MMTShop.Server.Features.Product
         public ProductRepository(
             IDbConnection dbConnection,
             IDatabaseQueryProvider databaseQueryProvider)
+            : base(dbConnection,
+                   databaseQueryProvider)
         {
-            this.dbConnection = dbConnection;
-            this.databaseQueryProvider = databaseQueryProvider;
+            
         }
-
-        private readonly IDbConnection dbConnection;
-        private readonly IDatabaseQueryProvider databaseQueryProvider;
     }
 }

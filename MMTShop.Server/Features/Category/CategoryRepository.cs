@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using MMTShop.Server.Base;
 using MMTShop.Shared.Constants;
 using MMTShop.Shared.Contracts;
 using MMTShop.Shared.Contracts.Repository;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace MMTShop.Server.Features.Category
 {
-    public class CategoryRepository : ICategoryRepository
+    public class CategoryRepository : RepositoryBase, ICategoryRepository
     {
         public async Task<IEnumerable<Shared.Models.Category>> GetCategoriesAsync(CancellationToken cancellationToken)
         {
@@ -21,6 +22,8 @@ namespace MMTShop.Server.Features.Category
         public CategoryRepository(
             IDbConnection dbConnection,
             IDatabaseQueryProvider databaseQueryProvider)
+            : base(dbConnection,
+                   databaseQueryProvider)
         {
             this.dbConnection = dbConnection;
             this.databaseQueryProvider = databaseQueryProvider;
