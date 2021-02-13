@@ -12,8 +12,11 @@ namespace MMTShop.Shared
             selectQueryCommands = new Dictionary<string, string>
             {
                 { DataConstants.GetCategories, "EXEC [dbo].[usp_GetCategories]" },
-                { DataConstants.GetFeaturedProducts, "EXEC [dbo].[usp_GetFeaturedProducts]" },
-                { DataConstants.GetProductsByCategoryName, "EXEC [dbo].[usp_GetProductsByCategory] @category = @categoryName " }
+                { DataConstants.GetFeaturedProducts, "EXEC [dbo].[usp_GetFeaturedProducts] " +
+                    "@validFrom = @promotionValidFrom, " +
+                    "@validTo = @promotionValidTo" },
+                { DataConstants.GetProductsByCategoryName, "EXEC [dbo].[usp_GetProductsByCategory] " +
+                "   @category = @categoryName " }
             };
         }
 
