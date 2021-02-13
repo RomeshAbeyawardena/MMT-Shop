@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using MMTShop.Client.Features.Categories;
-using MMTShop.Client.Features.Products;
+using MMTShop.Client.Features.Category;
+using MMTShop.Client.Features.Product;
 using MMTShop.Shared.Constants;
 using MMTShop.Shared.Contracts.Provider;
 using MMTShop.Shared.Models;
@@ -45,16 +45,28 @@ namespace MMTShop.Client
         }
 
         #region Methods
+        private static IServiceCollection RegisterServices(
+            IServiceCollection services,
+            string baseUrl)
+        {
+            return services
+                .AddScoped<IRestClient>((s) => new RestClient(baseUrl))
+                .Scan(sourceSelector => sourceSelector
+                    .FromAssemblyOf<Program>()
+                    .AddClasses(c => c.Where(type => type.Name.EndsWith("Provider")))
+                    .AsMatchingInterface()
+                    .WithScopedLifetime());
+        }
+
         private static void Initialize(
             string baseUrl)
         {
             isRunning = true;
             var servicesCollection = new ServiceCollection();
             
-            services = servicesCollection
-                .AddScoped<IRestClient>((s) => new RestClient(baseUrl))
-                .AddScoped<IProductProvider, ProductProvider>()
-                .AddScoped<ICategoryProvider, CategoryProvider>()
+            services = RegisterServices(
+                servicesCollection, 
+                baseUrl)
                 .BuildServiceProvider();
 
             actionDictionary = new Dictionary<int, Func<Task>>

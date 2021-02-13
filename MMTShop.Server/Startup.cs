@@ -1,5 +1,6 @@
 using System;
 using System.Data;
+using System.Linq;
 using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Authentication;
@@ -14,6 +15,7 @@ using MMTShop.Server.Features.Category;
 using MMTShop.Server.Features.Product;
 using MMTShop.Server.Pipelines.Behaviors;
 using MMTShop.Shared;
+using MMTShop.Shared.Constants;
 using MMTShop.Shared.Contracts;
 using MMTShop.Shared.Contracts.Provider;
 using MMTShop.Shared.Contracts.Repository;
@@ -31,13 +33,14 @@ namespace MMTShop.Server
             services
                 .AddValidatorsFromAssembly(currentAssembly)
                 .AddMediatR(currentAssembly)
-                .AddSingleton<IDatabaseQueryProvider, DatabaseQueryProvider>()
                 .AddSingleton<ApplicationSettings>()
                 .AddSingleton<ISystemClock, SystemClock>()
-                .AddScoped<IValidatorFactory, DefaultValidatorFactory>()
-                .AddScoped<ICategoryProvider, CategoryProvider>()
-                .AddScoped<IProductRepository, ProductRepository>()
-                .AddScoped<ICategoryRepository, CategoryRepository>()
+                .AddSingleton<IDatabaseQueryProvider, DatabaseQueryProvider>()
+                .Scan(sourceSelector => sourceSelector
+                    .FromAssemblies(currentAssembly)
+                    .AddClasses(c => c.Where(type => ServiceConstants.ServerServiceTypes
+                        .Any(st => type.Name.EndsWith(st))))
+                    .AsImplementedInterfaces())
                 .AddScoped(ConfigureDbConnection)
                 .AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidateRequestRequestPreProcessor<,>))
                 .AddLogging()

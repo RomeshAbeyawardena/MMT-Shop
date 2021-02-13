@@ -36,7 +36,7 @@ namespace MMTShop.Server.Features.Product
                         new { categoryName }));
         }
 
-        public ProductRepository(
+        public ProductRepository (
             IDbConnection dbConnection,
             IDatabaseQueryProvider databaseQueryProvider)
             : base(dbConnection,

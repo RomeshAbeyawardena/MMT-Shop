@@ -19,7 +19,7 @@ namespace MMTShop.Server.Features.Category
                     .GetCommand(DataConstants.GetCategories));
         }
 
-        public CategoryRepository(
+        public CategoryRepository (
             IDbConnection dbConnection,
             IDatabaseQueryProvider databaseQueryProvider)
             : base(dbConnection,
