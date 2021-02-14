@@ -10,8 +10,7 @@ GO
 CREATE FUNCTION [dbo].[udf_CalculateSKU] (
 	@categoryId INT
 )
-RETURNS NVARCHAR(6)
-WITH SCHEMABINDING
+RETURNS INT
 AS BEGIN
 	DECLARE @SKUIdentifier INT
 	DECLARE @currentItemCount INT
@@ -24,7 +23,7 @@ AS BEGIN
 	FROM [dbo].[Product]
 	WHERE [CategoryId] = @categoryId
 
-	RETURN CONVERT(VARCHAR, @SKUIdentifier + @currentItemCount + 1)
+	RETURN @SKUIdentifier + @currentItemCount + 1
 END
 
 GO
@@ -163,7 +162,7 @@ AS BEGIN
 					[dbo].[Product].[Price]
 			FROM [dbo].[Product]
 			WHERE [CategoryId] = @categoryId
-
+			ORDER BY [Sku]
 			RETURN 0;
 		END
 END

@@ -56,7 +56,7 @@ CREATE TABLE [dbo].[Product]
 	,[CategoryId] INT NOT NULL
 		CONSTRAINT FK_Product_Category
 		REFERENCES [dbo].[Category]
-	,[Sku] VARCHAR(6) NOT NULL
+	,[Sku] INT NOT NULL
 	,[Name] NVARCHAR(250) NOT NULL -- Using NVARCHAR to support UTF-8 characters
 	,[Description] NVARCHAR(2000) NULL 
 	,[Price] DECIMAL(19, 4) -- Addresses rounding issues mentioned here 
