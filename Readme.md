@@ -149,8 +149,21 @@ The first menu option will print out a list of featured products for the
 current promotion - all products with the SKU range of 1xxxx, 2xxxx and 3xxxx
 and then return you back to the menu.
 
-#### 2nd Option - List of categories
+#### 2nd Option - List of categories and products from specified category
 The second menu option will print out a list of categories, it will then ask
 you to select which one you would like to view products for, simply enter
 the category name and hit enter and it will print out the list of products
 within the specified category and then return you back to the menu.
+
+## Appendix
+
+### Nuget packages used
+- [RestSharp](https://restsharp.dev/)
+- [Mediatr](https://github.com/jbogard/MediatR)
+- [Fluent Validation](https://fluentvalidation.net/)
+- [NUnit](https://nunit.org/)
+- [Moq](https://github.com/Moq)
+
+### General guidances and useful documentation
+- [Set-ExecutionPolicy (Microsoft.PowerShell.Security) - PowerShell](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.security/set-executionpolicy?view=powershell-7.1)
+- [Safe storage of app secrets in development in ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/security/app-secrets?view=aspnetcore-5.0&tabs=windows)
