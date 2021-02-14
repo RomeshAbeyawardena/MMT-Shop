@@ -12,9 +12,14 @@ namespace MMTShop.Client
             IServiceProvider serviceProvider) 
             : base(serviceProvider)
         {
-            DispatcherDictionary.TryAdd('1', typeof(ProductDispatcher));
-            DispatcherDictionary.TryAdd('2', typeof(CategoryDispatcher));
-            DispatcherDictionary.TryAdd('q', typeof(QuitDispatcher));
+            DispatcherDictionary
+                .TryAdd('1', typeof(ProductDispatcher));
+
+            DispatcherDictionary
+                .TryAdd('2', typeof(CategoryDispatcher));
+
+            DispatcherDictionary
+                .TryAdd('q', typeof(QuitDispatcher));
         }
     }
 }

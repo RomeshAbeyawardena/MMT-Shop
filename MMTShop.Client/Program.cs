@@ -14,12 +14,13 @@ using System.Threading.Tasks;
 
 namespace MMTShop.Client
 {
-    class Program
+    public partial class Program
     {
         private static async Task Main()
         {
             //Set as null to use value in appSettings.json, specify a base url to ignore the value in appSettings.json
-            Initialize(null);
+            Initialize(
+                null);
             
             while(applicationState.IsRunning)
             {
@@ -27,65 +28,29 @@ namespace MMTShop.Client
                 {
                     Console
                         .WriteLine(
-                        "Welcome to MMT Shop.{0}Please select an option{0}", 
-                        GeneralConstants.NewLine);
+                            "Welcome to MMT Shop.{0}Please select an option{0}", 
+                            GeneralConstants.NewLine);
 
                     DisplayOptions();
 
-                    if(await ParseInput(Console.ReadKey(true).KeyChar))
+                    if(await ParseInput(
+                        Console.ReadKey(true).KeyChar))
                     { 
                         WaitForInput();
                     }
                 }
                 catch(InvalidOperationException exception)
                 {
-                    Console.WriteLine(exception.Message);
+                    Console.WriteLine(
+                        exception.Message);
                 }
             }
 
-            Console.WriteLine("Good Bye!");
+            Console.WriteLine(
+                "Good Bye!");
         }
 
         #region Methods
-
-        #region Setup
-        private static IServiceCollection RegisterServices(
-            IServiceCollection services,
-            string baseUrl)
-        {
-            return services
-                .AddSingleton<IConfiguration>((s) => new ConfigurationBuilder()
-                    .AddJsonFile(GeneralConstants.AppSettingsJsonFileName)
-                    .Build())
-                .AddSingleton<ApplicationSettings>()
-                .AddSingleton<IRestClient>((s) => new RestClient(baseUrl 
-                ?? s.GetRequiredService<ApplicationSettings>()
-                    .BaseUrl))
-                .AddSingleton<ICommandDispatcher<char>, MenuCommandDispatcher>()
-                .AddSingleton<CategoryDispatcher>()
-                .AddSingleton<ProductDispatcher>()
-                .AddSingleton<QuitDispatcher>()
-                .Scan(sourceSelector => sourceSelector
-                    .FromAssemblyOf<Program>()
-                    .AddClasses(c => c.Where(type => ServiceConstants
-                        .ClientServiceTypes
-                            .Any(st => type.Name.EndsWith(st))))
-                    .AsMatchingInterface()
-                    .WithSingletonLifetime());
-        }
-
-        private static void Initialize(
-            string baseUrl)
-        {
-            var servicesCollection = new ServiceCollection();
-            
-            services = RegisterServices(
-                servicesCollection, 
-                baseUrl)
-                .BuildServiceProvider();
-        }
-
-        #endregion
 
         private static void WaitForInput()
         {
@@ -122,8 +87,7 @@ namespace MMTShop.Client
 
         #endregion
         
-        #region DI Modules
-
+        #region Properties
         private static ICommandDispatcher<char> CommandDispatcher => services
             .GetRequiredService<ICommandDispatcher<char>>();
         #endregion
