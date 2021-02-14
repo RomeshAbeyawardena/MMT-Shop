@@ -10,7 +10,8 @@ using System.Threading.Tasks;
 using Models = MMTShop.Shared.Models;
 namespace MMTShop.Client.Features.Category
 {
-    public class CategoryModule : ModuleBase, ICategoryModule
+    public class CategoryModule 
+        : ModuleBase, ICategoryModule
     {
         public async Task<bool> GetCategories(
             Func<string, Task<bool>> getProductsByCategory)
@@ -46,7 +47,7 @@ namespace MMTShop.Client.Features.Category
             Display(categories, "Category", product =>
                 string.Format("\tName: {0}{1}",
                     product.Name,
-                    GeneralConstants.NewLine));
+                    FormatConstants.NewLine));
         }
 
         public CategoryModule(

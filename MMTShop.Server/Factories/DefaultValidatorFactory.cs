@@ -3,7 +3,8 @@ using System;
 
 namespace MMTShop.Server.Factories
 {
-    public class DefaultValidatorFactory : ValidatorFactoryBase
+    public class DefaultValidatorFactory 
+        : ValidatorFactoryBase
     {
         public override IValidator CreateInstance(
             Type validatorType)

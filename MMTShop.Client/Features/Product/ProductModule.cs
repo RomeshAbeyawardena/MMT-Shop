@@ -9,7 +9,8 @@ using Models = MMTShop.Shared.Models;
 
 namespace MMTShop.Client.Features.Product
 {
-    public class ProductModule : ModuleBase, IProductModule
+    public class ProductModule 
+        : ModuleBase, IProductModule
     {
         public async Task<bool> GetFeaturedProducts()
         {
@@ -45,7 +46,7 @@ namespace MMTShop.Client.Features.Product
                     product.Name,
                     product.Description,
                     product.Price,
-                    GeneralConstants.NewLine));
+                    FormatConstants.NewLine));
         }
 
         public ProductModule(

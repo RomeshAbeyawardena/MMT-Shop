@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace MMTShop.Client.Features.Category
 {
-    public class CategoryDispatcher : DispatcherBase<bool>
+    public class CategoryDispatcher 
+        : DispatcherBase<bool>
     {
         public override bool Invoke(object state)
         {

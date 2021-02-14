@@ -13,7 +13,8 @@ using Route = Microsoft.AspNetCore.Mvc.RouteAttribute;
 namespace MMTShop.Server.Base
 {
     [ApiController, Route("[controller]")]
-    public class MediatrControllerBase : ControllerBase
+    public class MediatrControllerBase 
+        : ControllerBase
     {
         protected IMediator Mediator => HttpContext.RequestServices.GetRequiredService<IMediator>();
 
@@ -47,7 +48,9 @@ namespace MMTShop.Server.Base
             foreach(var validationFailure in validationFailures)
             {
                 ModelState
-                    .AddModelError(validationFailure.PropertyName, validationFailure.ErrorMessage);
+                    .AddModelError(
+                        validationFailure.PropertyName, 
+                        validationFailure.ErrorMessage);
             }
 
             return BadRequest(ModelState);

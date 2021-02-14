@@ -8,7 +8,8 @@ using System.Threading.Tasks;
 
 namespace MMTShop.Server.Features.Product.GetProductsByCategory
 {
-    public class GetProductsByCategoryRequestValidator : AbstractValidator<GetProductsByCategoryRequest>
+    public class GetProductsByCategoryRequestValidator 
+        : AbstractValidator<GetProductsByCategoryRequest>
     {
         public GetProductsByCategoryRequestValidator(
             ICategoryProvider categoryProvider)

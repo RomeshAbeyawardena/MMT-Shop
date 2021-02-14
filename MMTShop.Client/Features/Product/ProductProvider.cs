@@ -10,7 +10,8 @@ using Models = MMTShop.Shared.Models;
 
 namespace MMTShop.Client.Features.Product
 {
-    public class ProductProvider : ProviderBase, IProductProvider
+    public class ProductProvider 
+        : ProviderBase, IProductProvider
     {
         public async Task<IEnumerable<Models.Product>> GetFeaturedProductsAsync(
             CancellationToken cancellationToken)
@@ -34,7 +35,9 @@ namespace MMTShop.Client.Features.Product
                 $"{HttpClientConstants.GetProductsUrl}/{categoryName}");
 
             var response = await RestClient
-                .GetAsync<ProductResponse>(request, cancellationToken);
+                .GetAsync<ProductResponse>(
+                    request, 
+                    cancellationToken);
 
             return response.Products;
         }

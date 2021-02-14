@@ -4,9 +4,12 @@ namespace MMTShop.Shared
 {
     public sealed class ApplicationSettings
     {
-        public ApplicationSettings(IConfiguration configuration)
+        public ApplicationSettings(
+            IConfiguration configuration)
         {
-            DefaultConnectionString = configuration.GetConnectionString("default");
+            DefaultConnectionString = configuration
+                .GetConnectionString("default");
+
             configuration.Bind(this);
         }
 

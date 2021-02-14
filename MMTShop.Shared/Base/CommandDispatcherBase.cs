@@ -12,9 +12,11 @@ namespace MMTShop.Shared.Base
         public IDispatcher GetDispatcher(
             TCommand command)
         {
-            if(DispatcherDictionary.TryGetValue(command, out var dispatcher))
+            if(DispatcherDictionary
+                .TryGetValue(command, out var dispatcher))
             {
-                return serviceProvider.GetService(dispatcher) as IDispatcher;
+                return serviceProvider
+                    .GetService(dispatcher) as IDispatcher;
             }
 
             throw new NullReferenceException("Dispatcher not found");

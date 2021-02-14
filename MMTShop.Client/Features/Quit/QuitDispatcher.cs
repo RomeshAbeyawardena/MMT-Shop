@@ -13,7 +13,9 @@ namespace MMTShop.Client.Features.Quit
             throw new NotImplementedException();
         }
 
-        public override Task<bool> InvokeAsync(object state, CancellationToken cancellationToken)
+        public override Task<bool> InvokeAsync(
+            object state, 
+            CancellationToken cancellationToken)
         {
             if(state is ApplicationState applicationState)
             {

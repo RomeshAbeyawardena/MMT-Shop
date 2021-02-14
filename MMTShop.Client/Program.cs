@@ -22,7 +22,7 @@ namespace MMTShop.Client
                     Console
                         .WriteLine(
                             "Welcome to MMT Shop.{0}Please select an option{0}", 
-                            GeneralConstants.NewLine);
+                            FormatConstants.NewLine);
 
                     DisplayOptions();
 
@@ -34,7 +34,8 @@ namespace MMTShop.Client
                 }
                 catch(InvalidOperationException exception)
                 {
-                    Console.WriteLine(
+                    Console
+                        .WriteLine(
                         exception.Message);
                 }
             }
@@ -47,16 +48,20 @@ namespace MMTShop.Client
 
         private static void WaitForInput()
         {
-            Console.WriteLine("Press any key to continue");
-            Console.ReadKey(true);
+            Console
+                .WriteLine("Press any key to continue");
+
+            Console.
+                ReadKey(true);
         }
         
         private static void DisplayOptions()
         {
-            Console.WriteLine(
+            Console
+                .WriteLine(
                 "1. Display featured products{0}" +
                 "2. Display categories and get products for a specific category{0}" +
-                "q. Quit", GeneralConstants.NewLine);
+                "q. Quit", FormatConstants.NewLine);
         }
 
         private static async Task<bool> ParseInput(

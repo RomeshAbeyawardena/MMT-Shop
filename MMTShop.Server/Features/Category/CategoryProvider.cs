@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace MMTShop.Server.Features.Category
 {
-    public class CategoryProvider : ICategoryProvider
+    public class CategoryProvider 
+        : ICategoryProvider
     {
         public async Task<IEnumerable<Shared.Models.Category>> GetCategories(
             CancellationToken cancellationToken)

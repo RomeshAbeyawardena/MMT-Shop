@@ -17,16 +17,20 @@ namespace MMTShop.Client.Base
             {
                 var item = items
                     .ElementAt(itemIndex);
-                Console.WriteLine("--- {0} {1} of {2} ---{3}{3}",
-                    itemType,
-                    itemIndex + 1, 
-                    itemCount,
-                    GeneralConstants.NewLine);
+                Console
+                    .WriteLine("--- {0} {1} of {2} ---{3}{3}",
+                        itemType,
+                        itemIndex + 1, 
+                        itemCount,
+                        FormatConstants.NewLine);
 
                 Console.WriteLine(
                     itemDisplayFormat(item));
 
-                Console.WriteLine("-------------------------------{0}", GeneralConstants.NewLine);
+                Console
+                    .WriteLine(
+                        "-------------------------------{0}", 
+                        FormatConstants.NewLine);
             }
         }
     }

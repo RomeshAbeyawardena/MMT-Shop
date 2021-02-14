@@ -7,6 +7,7 @@ namespace MMTShop.Shared.Contracts.Repository
 {
     public interface ICategoryRepository
     {
-        Task<IEnumerable<Category>> GetCategoriesAsync(CancellationToken cancellationToken);
+        Task<IEnumerable<Category>> GetCategoriesAsync(
+            CancellationToken cancellationToken);
     }
 }

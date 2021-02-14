@@ -4,6 +4,8 @@ namespace MMTShop.Shared.Contracts
 {
     public interface IDatabaseQueryProvider
     {
-        CommandDefinition GetCommand(string key, object parameters = null);
+        CommandDefinition GetCommand(
+            string key, 
+            object parameters = null);
     }
 }

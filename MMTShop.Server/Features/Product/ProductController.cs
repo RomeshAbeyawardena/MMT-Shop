@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 
 namespace MMTShop.Server.Features.Product
 {
-    public class ProductController : MediatrControllerBase
+    public class ProductController 
+        : MediatrControllerBase
     {
         [HttpGet]
         public Task<IActionResult> GetFeaturedProducts(

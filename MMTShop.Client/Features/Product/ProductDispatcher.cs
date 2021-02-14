@@ -6,14 +6,18 @@ using System.Threading.Tasks;
 
 namespace MMTShop.Client.Features.Product
 {
-    public class ProductDispatcher : DispatcherBase<bool>
+    public class ProductDispatcher 
+        : DispatcherBase<bool>
     {
-        public override bool Invoke(object state)
+        public override bool Invoke(
+            object state)
         {
             throw new NotImplementedException();
         }
 
-        public override Task<bool> InvokeAsync(object state, CancellationToken cancellationToken)
+        public override Task<bool> InvokeAsync(
+            object state, 
+            CancellationToken cancellationToken)
         {
             return productModule
                     .GetFeaturedProducts();

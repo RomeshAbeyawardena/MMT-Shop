@@ -10,7 +10,8 @@ using Models = MMTShop.Shared.Models;
 
 namespace MMTShop.Client.Features.Category
 {
-    public class CategoryProvider : ProviderBase, ICategoryProvider
+    public class CategoryProvider 
+        : ProviderBase, ICategoryProvider
     {
         public async Task<IEnumerable<Models.Category>> GetCategories(
             CancellationToken cancellationToken)

@@ -23,8 +23,8 @@ namespace MMTShop.Client
                     .Build())
                 .AddSingleton<ApplicationSettings>()
                 .AddSingleton<IRestClient>((s) => new RestClient(baseUrl 
-                ?? s.GetRequiredService<ApplicationSettings>()
-                    .BaseUrl))
+                    ?? s.GetRequiredService<ApplicationSettings>()
+                        .BaseUrl))
                 .AddSingleton<ICommandDispatcher<char>, MenuCommandDispatcher>()
                 .AddSingleton<CategoryDispatcher>()
                 .AddSingleton<ProductDispatcher>()

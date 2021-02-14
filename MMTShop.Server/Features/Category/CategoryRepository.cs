@@ -7,15 +7,18 @@ using System.Collections.Generic;
 using System.Data;
 using System.Threading;
 using System.Threading.Tasks;
+using Models = MMTShop.Shared.Models;
 
 namespace MMTShop.Server.Features.Category
 {
-    public class CategoryRepository : RepositoryBase, ICategoryRepository
+    public class CategoryRepository 
+        : RepositoryBase, ICategoryRepository
     {
-        public async Task<IEnumerable<Shared.Models.Category>> GetCategoriesAsync(CancellationToken cancellationToken)
+        public async Task<IEnumerable<Models.Category>> GetCategoriesAsync(
+            CancellationToken cancellationToken)
         {
-            return await dbConnection
-                .QueryAsync<Shared.Models.Category>(databaseQueryProvider
+            return await DbConnection
+                .QueryAsync<Models.Category>(DatabaseQueryProvider
                     .GetCommand(DataConstants.GetCategories));
         }
 
@@ -25,11 +28,6 @@ namespace MMTShop.Server.Features.Category
             : base(dbConnection,
                    databaseQueryProvider)
         {
-            this.dbConnection = dbConnection;
-            this.databaseQueryProvider = databaseQueryProvider;
         }
-
-        private readonly IDbConnection dbConnection;
-        private readonly IDatabaseQueryProvider databaseQueryProvider;
     }
 }

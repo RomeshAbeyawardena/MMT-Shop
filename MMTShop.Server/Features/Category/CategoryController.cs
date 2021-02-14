@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace MMTShop.Server.Features.Category
 {
-    public class CategoryController : MediatrControllerBase
+    public class CategoryController 
+        : MediatrControllerBase
     {
         [HttpGet]
         public Task<IActionResult> GetCategories(
