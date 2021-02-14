@@ -13,7 +13,7 @@ namespace MMTShop.Client.Features.Category
     public class CategoryProvider 
         : ProviderBase, ICategoryProvider
     {
-        public async Task<IEnumerable<Models.Category>> GetCategories(
+        public async Task<IEnumerable<Models.Category>> GetCategoriesAsync(
             CancellationToken cancellationToken)
         {
             var request = new RestRequest(

@@ -17,21 +17,25 @@ namespace MMTShop.Client.Features.Quit
     public class QuitDispatcher
         : DispatcherBase<bool>
     {
-        public override bool Invoke(object state)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override Task<bool> InvokeAsync(
-            object state, 
-            CancellationToken cancellationToken)
+        public override bool Invoke(
+            object state)
         {
             if(state is ApplicationState applicationState)
             {
                 applicationState.IsRunning = false;
             }
 
-            return Task.FromResult(false);
+            return false;
+        }
+
+        public override Task<bool> InvokeAsync(
+            object state, 
+            CancellationToken cancellationToken)
+        {
+            
+            return Task
+                .FromResult(
+                    Invoke(state));
         }
     }
 }

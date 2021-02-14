@@ -12,7 +12,7 @@ namespace MMTShop.Client.Features.Product
     public class ProductModule 
         : ModuleBase, IProductModule
     {
-        public async Task<bool> GetFeaturedProducts()
+        public async Task<bool> DisplayFeaturedProducts()
         {
             var products = await productProvider
                 .GetFeaturedProductsAsync(CancellationToken.None);
@@ -21,7 +21,7 @@ namespace MMTShop.Client.Features.Product
             return true;
         }
 
-        public async Task<bool> GetProductsByCategory(
+        public async Task<bool> DisplayProductsByCategory(
             string categoryName)
         {
             var products = await productProvider

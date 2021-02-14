@@ -30,7 +30,7 @@ namespace MMTShop.UnitTests.Validation
 
             //act
             categoryProviderMock
-                .Setup(a => a.GetCategories(It.IsAny<CancellationToken>()))
+                .Setup(a => a.GetCategoriesAsync(It.IsAny<CancellationToken>()))
                     .Returns(Task.FromResult<IEnumerable<Category>>(data));
 
             var validationResult = sut
@@ -52,7 +52,7 @@ namespace MMTShop.UnitTests.Validation
             };
 
             categoryProviderMock.
-                Setup(a => a.GetCategories(It.IsAny<CancellationToken>()))
+                Setup(a => a.GetCategoriesAsync(It.IsAny<CancellationToken>()))
                     .Returns(Task.FromResult<IEnumerable<Category>>(data))
                     .Verifiable();
 
@@ -78,7 +78,7 @@ namespace MMTShop.UnitTests.Validation
             };
 
             categoryProviderMock
-                .Setup(a => a.GetCategories(It.IsAny<CancellationToken>()))
+                .Setup(a => a.GetCategoriesAsync(It.IsAny<CancellationToken>()))
                     .Returns(Task.FromResult<IEnumerable<Category>>(data));
 
             //act

@@ -38,7 +38,7 @@ namespace MMTShop.Server
                         .Any(st => type.Name.EndsWith(st))))
                     .AsImplementedInterfaces())
                 .AddScoped(ConfigureDbConnection)
-                .AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidateRequestRequestPreProcessor<,>))
+                .AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidateRequestPipelineBehavior<,>))
                 .AddLogging()
                 .AddControllers();
         }
@@ -57,11 +57,14 @@ namespace MMTShop.Server
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
-                endpoints.MapGet("/", async context =>
-                {
-                    await context.Response.WriteAsync("MMT Shop Server");
-                });
+                endpoints
+                    .MapControllers();
+
+                endpoints
+                    .MapGet("/", async context =>
+                    {
+                        await context.Response.WriteAsync("MMT Shop Server");
+                    });
             });
         }
 

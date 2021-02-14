@@ -88,7 +88,6 @@ namespace MMTShop.Client
 
         #region Fields
         private static readonly ApplicationState applicationState = new ApplicationState { IsRunning = true } ;
-        
         private static IServiceProvider services;
         #endregion
     }

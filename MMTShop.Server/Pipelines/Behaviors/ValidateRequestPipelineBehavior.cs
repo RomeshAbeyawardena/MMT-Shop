@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace MMTShop.Server.Pipelines.Behaviors
 {
-    public class ValidateRequestRequestPreProcessor<TRequest, TResponse> 
+    public class ValidateRequestPipelineBehavior<TRequest, TResponse> 
         : IPipelineBehavior<TRequest, TResponse>
         where TRequest : IRequest<TResponse>
     {
@@ -25,7 +25,7 @@ namespace MMTShop.Server.Pipelines.Behaviors
             return await next();
         }
 
-        public ValidateRequestRequestPreProcessor(
+        public ValidateRequestPipelineBehavior(
             IValidatorFactory validatorFactory)
         {
             this.validatorFactory = validatorFactory;

@@ -9,7 +9,7 @@ namespace MMTShop.Server.Features.Category
     public class CategoryProvider 
         : ICategoryProvider
     {
-        public async Task<IEnumerable<Shared.Models.Category>> GetCategories(
+        public async Task<IEnumerable<Shared.Models.Category>> GetCategoriesAsync(
             CancellationToken cancellationToken)
         {
             return await categoryRepository

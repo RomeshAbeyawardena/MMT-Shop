@@ -19,8 +19,8 @@ namespace MMTShop.Client.Features.Category
             CancellationToken cancellationToken)
         {
             return categoryModule
-                    .GetCategories(productModule
-                        .GetProductsByCategory);
+                    .DisplayCategories(productModule
+                        .DisplayProductsByCategory);
         }
 
         public CategoryDispatcher(

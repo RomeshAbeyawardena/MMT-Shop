@@ -4,8 +4,8 @@ namespace MMTShop.Shared.Contracts.Modules
 {
     public interface IProductModule
     {
-        Task<bool> GetFeaturedProducts();
-        Task<bool> GetProductsByCategory(
+        Task<bool> DisplayFeaturedProducts();
+        Task<bool> DisplayProductsByCategory(
             string categoryName);
     }
 }

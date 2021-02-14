@@ -12,7 +12,8 @@ using Route = Microsoft.AspNetCore.Mvc.RouteAttribute;
 
 namespace MMTShop.Server.Base
 {
-    [ApiController, Route("[controller]")]
+    [ApiController, 
+     Route("[controller]")]
     public class MediatrControllerBase 
         : ControllerBase
     {

@@ -7,7 +7,7 @@ namespace MMTShop.Shared.Contracts.Provider
 {
     public interface ICategoryProvider
     {
-        Task<IEnumerable<Category>> GetCategories(
+        Task<IEnumerable<Category>> GetCategoriesAsync(
             CancellationToken cancellationToken);
     }
 }

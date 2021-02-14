@@ -20,7 +20,7 @@ namespace MMTShop.Client.Features.Product
             CancellationToken cancellationToken)
         {
             return productModule
-                    .GetFeaturedProducts();
+                    .DisplayFeaturedProducts();
         }
 
         public ProductDispatcher(
