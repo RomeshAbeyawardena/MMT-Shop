@@ -6,5 +6,6 @@ namespace MMTShop.Shared.Constants
     {
         public static IEnumerable<string> ServerServiceTypes => new [] { "Provider", "Repository", "Factory" };
         public static IEnumerable<string> ClientServiceTypes => new [] { "Provider", "Module" };
+        public const string  DispatcherHandler = nameof(DispatcherHandler);
     }
 }

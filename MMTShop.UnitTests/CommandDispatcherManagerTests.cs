@@ -16,29 +16,29 @@ namespace MMTShop.UnitTests
         [SetUp]
         public void SetUp()
         {
-            dispatcherMock = new Mock<IDispatcher<bool>>();
+            dispatcherMock = new Mock<IDispatcherHandler<bool>>();
             serviceProviderMock = new Mock<IServiceProvider>();
 
             var state = new object();
             serviceProviderMock
                 .Setup(a => a
-                    .GetService(typeof(ProductDispatcher)))
+                    .GetService(typeof(ProductDispatcherHandler)))
                 .Returns(dispatcherMock.Object)
                 .Verifiable();
 
             serviceProviderMock
                 .Setup(a => a
-                    .GetService(typeof(CategoryDispatcher)))
+                    .GetService(typeof(CategoryDispatcherHandler)))
                 .Returns(dispatcherMock.Object)
                 .Verifiable();
 
             serviceProviderMock
                 .Setup(a => a
-                    .GetService(typeof(QuitDispatcher)))
+                    .GetService(typeof(QuitDispatcherHandler)))
                 .Returns(dispatcherMock.Object)
                 .Verifiable();
 
-            sut = new MenuCommandDispatcherManager(serviceProviderMock.Object);
+            sut = new MenuCommandDispatcher(serviceProviderMock.Object);
         }
 
         [Test]
@@ -56,7 +56,7 @@ namespace MMTShop.UnitTests
             serviceProviderMock
                 .Verify(a => a
                     .GetService(
-                        typeof(ProductDispatcher)));
+                        typeof(ProductDispatcherHandler)));
 
             //act
             dispatcher = sut
@@ -70,7 +70,7 @@ namespace MMTShop.UnitTests
             serviceProviderMock
                 .Verify(a => a
                     .GetService(
-                        typeof(CategoryDispatcher)));
+                        typeof(CategoryDispatcherHandler)));
 
             //act
             dispatcher = sut
@@ -84,7 +84,7 @@ namespace MMTShop.UnitTests
             serviceProviderMock
                 .Verify(a => a
                     .GetService(
-                        typeof(QuitDispatcher)));
+                        typeof(QuitDispatcherHandler)));
 
         }
 
@@ -98,8 +98,8 @@ namespace MMTShop.UnitTests
                     });
         }
 
-        private Mock<IDispatcher<bool>> dispatcherMock;
+        private Mock<IDispatcherHandler<bool>> dispatcherMock;
         private Mock<IServiceProvider> serviceProviderMock;
-        private MenuCommandDispatcherManager sut;
+        private MenuCommandDispatcher sut;
     }
 }

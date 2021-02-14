@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace MMTShop.Shared.Base
 {
-    public abstract class DispatcherBase<T> : IDispatcher<T>
+    public abstract class DispatcherHandlerBase<T> : IDispatcherHandler<T>
     {
         public abstract T Invoke(
             object state);
@@ -13,13 +13,13 @@ namespace MMTShop.Shared.Base
             object state, 
             CancellationToken cancellationToken);
 
-        object IDispatcher.Invoke(
+        object IDispatcherHandler.Invoke(
             object state)
         {
             return Invoke(state);
         }
 
-        async Task<object> IDispatcher.InvokeAsync(
+        async Task<object> IDispatcherHandler.InvokeAsync(
             object state, 
             CancellationToken cancellationToken)
         {

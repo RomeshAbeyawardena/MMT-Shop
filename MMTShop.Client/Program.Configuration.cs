@@ -25,10 +25,14 @@ namespace MMTShop.Client
                 .AddSingleton<IRestClient>((s) => new RestClient(baseUrl 
                     ?? s.GetRequiredService<ApplicationSettings>()
                         .BaseUrl))
-                .AddSingleton<ICommandDispatcherManager<char>, MenuCommandDispatcherManager>()
-                .AddSingleton<CategoryDispatcher>()
-                .AddSingleton<ProductDispatcher>()
-                .AddSingleton<QuitDispatcher>()
+                .AddSingleton<ICommandDispatcher<char>, MenuCommandDispatcher>()
+                .Scan(sourceSelector => sourceSelector
+                    .FromAssemblyOf<Program>()
+                    .AddClasses(c => c.Where(type => type.Name
+                        .EndsWith(ServiceConstants
+                            .DispatcherHandler)))
+                    .AsSelf()
+                    .WithSingletonLifetime())
                 .Scan(sourceSelector => sourceSelector
                     .FromAssemblyOf<Program>()
                     .AddClasses(c => c.Where(type => ServiceConstants

@@ -14,8 +14,8 @@ namespace MMTShop.Client.Features.Quit
      *  to break out of the while block and allow the application
      *  to terminate gracefully.
     */
-    public class QuitDispatcher
-        : DispatcherBase<bool>
+    public class QuitDispatcherHandler
+        : DispatcherHandlerBase<bool>
     {
         public override bool Invoke(
             object state)

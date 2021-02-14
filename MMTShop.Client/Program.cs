@@ -82,8 +82,8 @@ namespace MMTShop.Client
         #endregion
         
         #region Properties
-        private static ICommandDispatcherManager<char> CommandDispatcherManager => services
-            .GetRequiredService<ICommandDispatcherManager<char>>();
+        private static ICommandDispatcher<char> CommandDispatcherManager => services
+            .GetRequiredService<ICommandDispatcher<char>>();
         #endregion
 
         #region Fields

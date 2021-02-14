@@ -6,28 +6,28 @@ using System.Threading.Tasks;
 
 namespace MMTShop.Shared.Base
 {
-    public class CommandDispatcherManagerBase<TCommand> 
-        : ICommandDispatcherManager<TCommand>
+    public class CommandDispatcherBase<TCommand> 
+        : ICommandDispatcher<TCommand>
     {
-        public IDispatcher GetDispatcher(
+        public IDispatcherHandler GetDispatcher(
             TCommand command)
         {
             if(DispatcherDictionary
                 .TryGetValue(command, out var dispatcher))
             {
                 return serviceProvider
-                    .GetService(dispatcher) as IDispatcher;
+                    .GetService(dispatcher) as IDispatcherHandler;
             }
 
             throw new NullReferenceException("Dispatcher not found");
         }
 
-        public IDispatcher<TResult> GetDispatcher<TResult>(
+        public IDispatcherHandler<TResult> GetDispatcher<TResult>(
             TCommand command)
         {
             var dispatcher = GetDispatcher(command);
 
-            if(dispatcher is IDispatcher<TResult> genericDispatcher)
+            if(dispatcher is IDispatcherHandler<TResult> genericDispatcher)
             {
                 return genericDispatcher;
             }
@@ -69,7 +69,7 @@ namespace MMTShop.Shared.Base
                 .InvokeAsync(state, cancellationToken);
         }
 
-        protected CommandDispatcherManagerBase(
+        protected CommandDispatcherBase(
             IServiceProvider serviceProvider)
         {
             this.serviceProvider =  serviceProvider;

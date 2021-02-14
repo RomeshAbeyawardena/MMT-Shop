@@ -3,12 +3,12 @@ using System.Threading.Tasks;
 
 namespace MMTShop.Shared.Contracts
 {
-    public interface ICommandDispatcherManager<TCommand>
+    public interface ICommandDispatcher<TCommand>
     {
-        IDispatcher GetDispatcher(
+        IDispatcherHandler GetDispatcher(
             TCommand command);
 
-        IDispatcher<TResult> GetDispatcher<TResult>(
+        IDispatcherHandler<TResult> GetDispatcher<TResult>(
             TCommand command);
 
         object InvokeDispatcher(

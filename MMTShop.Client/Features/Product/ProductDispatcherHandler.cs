@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace MMTShop.Client.Features.Product
 {
-    public class ProductDispatcher 
-        : DispatcherBase<bool>
+    public class ProductDispatcherHandler 
+        : DispatcherHandlerBase<bool>
     {
         public override bool Invoke(
             object state)
@@ -23,7 +23,7 @@ namespace MMTShop.Client.Features.Product
                     .DisplayFeaturedProducts();
         }
 
-        public ProductDispatcher(
+        public ProductDispatcherHandler(
             IProductModule productModule)
         {
             this.productModule = productModule;

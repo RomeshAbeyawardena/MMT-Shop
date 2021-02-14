@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace MMTShop.Shared.Contracts
 {
-    public interface IDispatcher<TResult> : IDispatcher
+    public interface IDispatcherHandler<TResult> : IDispatcherHandler
     {
         new Task<TResult> InvokeAsync(
             object state, 
@@ -13,7 +13,7 @@ namespace MMTShop.Shared.Contracts
             object state);
     }
 
-    public interface IDispatcher 
+    public interface IDispatcherHandler 
     {
         Task<object> InvokeAsync(
             object state, 

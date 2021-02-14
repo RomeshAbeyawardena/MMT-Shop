@@ -6,21 +6,21 @@ using MMTShop.Shared.Base;
 
 namespace MMTShop.Client
 {
-    public class MenuCommandDispatcherManager 
-        : CommandDispatcherManagerBase<char>
+    public class MenuCommandDispatcher
+        : CommandDispatcherBase<char>
     {
-        public MenuCommandDispatcherManager(
+        public MenuCommandDispatcher(
             IServiceProvider serviceProvider) 
             : base(serviceProvider)
         {
             DispatcherDictionary
-                .TryAdd('1', typeof(ProductDispatcher));
+                .TryAdd('1', typeof(ProductDispatcherHandler));
 
             DispatcherDictionary
-                .TryAdd('2', typeof(CategoryDispatcher));
+                .TryAdd('2', typeof(CategoryDispatcherHandler));
 
             DispatcherDictionary
-                .TryAdd('q', typeof(QuitDispatcher));
+                .TryAdd('q', typeof(QuitDispatcherHandler));
         }
     }
 }
