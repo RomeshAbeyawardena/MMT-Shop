@@ -62,7 +62,9 @@ CREATE TABLE [dbo].[Product]
 	,[Price] DECIMAL(19, 4) -- Addresses rounding issues mentioned here 
 							-- https://stackoverflow.com/questions/224462/storing-money-in-a-decimal-column-what-precision-and-scale
 	,INDEX IDX_Product NONCLUSTERED ([Name]) 
-	,CONSTRAINT UQ_Product UNIQUE([Name]) -- prevent multiple products with the same name
+	,CONSTRAINT UQ_Product UNIQUE(
+		[Name], 
+		[CategoryId]) -- prevent multiple products with the same name
 )
 
 GO

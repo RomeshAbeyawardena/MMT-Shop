@@ -358,7 +358,6 @@ EXEC [dbo].[usp_AddProduct]
 SELECT @categoryId = [Id] FROM [dbo].[Category]
 WHERE [Name] = 'Fitness'
 
-
 EXEC [dbo].[usp_AddProduct]
         @categoryId,   -- CategoryId - int
         N'Dumbells', -- Name - nvarchar(250)
@@ -467,3 +466,71 @@ EXEC [dbo].[usp_AddProduct]
         N'Kickboard', -- Name - nvarchar(250)
         N'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras nec fringilla nibh. Vivamus vestibulum leo ligula, ac condimentum nunc semper laoreet. Sed sed nunc et nibh mollis tempor. In non ornare libero, eget venenatis magna. Ut faucibus dui sit amet nunc ultricies, vitae facilisis urna facilisis. Praesent consectetur, orci ut vestibulum aliquam, eros nibh tincidunt neque, sed malesuada nunc nunc ac erat. Nulla volutpat ultrices lectus vel convallis. Fusce odio ipsum, pulvinar sed nisl vel, interdum interdum ante. Proin et pharetra turpis. Suspendisse potenti. Sed varius dolor in libero rutrum pellentesque. Duis efficitur lorem ac orci pulvinar sagittis. Morbi eleifend interdum rhoncus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae;', -- Description - nvarchar(2000)
         89.99 -- Price - decimal(19, 4)
+
+SELECT @categoryId = [Id] FROM [dbo].[Category]
+WHERE [Name] = 'Toys'
+
+EXEC [dbo].[usp_AddProduct]
+        @categoryId,   -- CategoryId - int
+        N'Super Soaker', -- Name - nvarchar(250)
+        N'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras nec fringilla nibh. Vivamus vestibulum leo ligula, ac condimentum nunc semper laoreet. Sed sed nunc et nibh mollis tempor. In non ornare libero, eget venenatis magna. Ut faucibus dui sit amet nunc ultricies, vitae facilisis urna facilisis. Praesent consectetur, orci ut vestibulum aliquam, eros nibh tincidunt neque, sed malesuada nunc nunc ac erat. Nulla volutpat ultrices lectus vel convallis. Fusce odio ipsum, pulvinar sed nisl vel, interdum interdum ante. Proin et pharetra turpis. Suspendisse potenti. Sed varius dolor in libero rutrum pellentesque. Duis efficitur lorem ac orci pulvinar sagittis. Morbi eleifend interdum rhoncus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae;', -- Description - nvarchar(2000)
+        45.99 -- Price - decimal(19, 4)
+	
+EXEC [dbo].[usp_AddProduct]
+        @categoryId,   -- CategoryId - int
+        N'Doll house', -- Name - nvarchar(250)
+        N'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras nec fringilla nibh. Vivamus vestibulum leo ligula, ac condimentum nunc semper laoreet. Sed sed nunc et nibh mollis tempor. In non ornare libero, eget venenatis magna. Ut faucibus dui sit amet nunc ultricies, vitae facilisis urna facilisis. Praesent consectetur, orci ut vestibulum aliquam, eros nibh tincidunt neque, sed malesuada nunc nunc ac erat. Nulla volutpat ultrices lectus vel convallis. Fusce odio ipsum, pulvinar sed nisl vel, interdum interdum ante. Proin et pharetra turpis. Suspendisse potenti. Sed varius dolor in libero rutrum pellentesque. Duis efficitur lorem ac orci pulvinar sagittis. Morbi eleifend interdum rhoncus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae;', -- Description - nvarchar(2000)
+        77.99 -- Price - decimal(19, 4)
+
+EXEC [dbo].[usp_AddProduct]
+        @categoryId,   -- CategoryId - int
+        N'Skates', -- Name - nvarchar(250)
+        N'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras nec fringilla nibh. Vivamus vestibulum leo ligula, ac condimentum nunc semper laoreet. Sed sed nunc et nibh mollis tempor. In non ornare libero, eget venenatis magna. Ut faucibus dui sit amet nunc ultricies, vitae facilisis urna facilisis. Praesent consectetur, orci ut vestibulum aliquam, eros nibh tincidunt neque, sed malesuada nunc nunc ac erat. Nulla volutpat ultrices lectus vel convallis. Fusce odio ipsum, pulvinar sed nisl vel, interdum interdum ante. Proin et pharetra turpis. Suspendisse potenti. Sed varius dolor in libero rutrum pellentesque. Duis efficitur lorem ac orci pulvinar sagittis. Morbi eleifend interdum rhoncus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae;', -- Description - nvarchar(2000)
+        55.99 -- Price - decimal(19, 4)
+
+EXEC [dbo].[usp_AddProduct]
+        @categoryId,   -- CategoryId - int
+        N'Lego set', -- Name - nvarchar(250)
+        N'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras nec fringilla nibh. Vivamus vestibulum leo ligula, ac condimentum nunc semper laoreet. Sed sed nunc et nibh mollis tempor. In non ornare libero, eget venenatis magna. Ut faucibus dui sit amet nunc ultricies, vitae facilisis urna facilisis. Praesent consectetur, orci ut vestibulum aliquam, eros nibh tincidunt neque, sed malesuada nunc nunc ac erat. Nulla volutpat ultrices lectus vel convallis. Fusce odio ipsum, pulvinar sed nisl vel, interdum interdum ante. Proin et pharetra turpis. Suspendisse potenti. Sed varius dolor in libero rutrum pellentesque. Duis efficitur lorem ac orci pulvinar sagittis. Morbi eleifend interdum rhoncus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae;', -- Description - nvarchar(2000)
+        33.99 -- Price - decimal(19, 4)
+
+EXEC [dbo].[usp_AddProduct]
+        @categoryId,   -- CategoryId - int
+        N'Play Set', -- Name - nvarchar(250)
+        N'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras nec fringilla nibh. Vivamus vestibulum leo ligula, ac condimentum nunc semper laoreet. Sed sed nunc et nibh mollis tempor. In non ornare libero, eget venenatis magna. Ut faucibus dui sit amet nunc ultricies, vitae facilisis urna facilisis. Praesent consectetur, orci ut vestibulum aliquam, eros nibh tincidunt neque, sed malesuada nunc nunc ac erat. Nulla volutpat ultrices lectus vel convallis. Fusce odio ipsum, pulvinar sed nisl vel, interdum interdum ante. Proin et pharetra turpis. Suspendisse potenti. Sed varius dolor in libero rutrum pellentesque. Duis efficitur lorem ac orci pulvinar sagittis. Morbi eleifend interdum rhoncus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae;', -- Description - nvarchar(2000)
+        55.99 -- Price - decimal(19, 4)
+
+
+EXEC [dbo].[usp_AddProduct]
+        @categoryId,   -- CategoryId - int
+        N'Mini RC Car', -- Name - nvarchar(250)
+        N'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras nec fringilla nibh. Vivamus vestibulum leo ligula, ac condimentum nunc semper laoreet. Sed sed nunc et nibh mollis tempor. In non ornare libero, eget venenatis magna. Ut faucibus dui sit amet nunc ultricies, vitae facilisis urna facilisis. Praesent consectetur, orci ut vestibulum aliquam, eros nibh tincidunt neque, sed malesuada nunc nunc ac erat. Nulla volutpat ultrices lectus vel convallis. Fusce odio ipsum, pulvinar sed nisl vel, interdum interdum ante. Proin et pharetra turpis. Suspendisse potenti. Sed varius dolor in libero rutrum pellentesque. Duis efficitur lorem ac orci pulvinar sagittis. Morbi eleifend interdum rhoncus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae;', -- Description - nvarchar(2000)
+        22.99 -- Price - decimal(19, 4)
+
+
+EXEC [dbo].[usp_AddProduct]
+        @categoryId,   -- CategoryId - int
+        N'Mini RC Heli', -- Name - nvarchar(250)
+        N'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras nec fringilla nibh. Vivamus vestibulum leo ligula, ac condimentum nunc semper laoreet. Sed sed nunc et nibh mollis tempor. In non ornare libero, eget venenatis magna. Ut faucibus dui sit amet nunc ultricies, vitae facilisis urna facilisis. Praesent consectetur, orci ut vestibulum aliquam, eros nibh tincidunt neque, sed malesuada nunc nunc ac erat. Nulla volutpat ultrices lectus vel convallis. Fusce odio ipsum, pulvinar sed nisl vel, interdum interdum ante. Proin et pharetra turpis. Suspendisse potenti. Sed varius dolor in libero rutrum pellentesque. Duis efficitur lorem ac orci pulvinar sagittis. Morbi eleifend interdum rhoncus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae;', -- Description - nvarchar(2000)
+        89.99 -- Price - decimal(19, 4)
+
+
+EXEC [dbo].[usp_AddProduct]
+        @categoryId,   -- CategoryId - int
+        N'Plushie', -- Name - nvarchar(250)
+        N'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras nec fringilla nibh. Vivamus vestibulum leo ligula, ac condimentum nunc semper laoreet. Sed sed nunc et nibh mollis tempor. In non ornare libero, eget venenatis magna. Ut faucibus dui sit amet nunc ultricies, vitae facilisis urna facilisis. Praesent consectetur, orci ut vestibulum aliquam, eros nibh tincidunt neque, sed malesuada nunc nunc ac erat. Nulla volutpat ultrices lectus vel convallis. Fusce odio ipsum, pulvinar sed nisl vel, interdum interdum ante. Proin et pharetra turpis. Suspendisse potenti. Sed varius dolor in libero rutrum pellentesque. Duis efficitur lorem ac orci pulvinar sagittis. Morbi eleifend interdum rhoncus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae;', -- Description - nvarchar(2000)
+        27.99 -- Price - decimal(19, 4)
+
+
+EXEC [dbo].[usp_AddProduct]
+        @categoryId,   -- CategoryId - int
+        N'Pogo Stick', -- Name - nvarchar(250)
+        N'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras nec fringilla nibh. Vivamus vestibulum leo ligula, ac condimentum nunc semper laoreet. Sed sed nunc et nibh mollis tempor. In non ornare libero, eget venenatis magna. Ut faucibus dui sit amet nunc ultricies, vitae facilisis urna facilisis. Praesent consectetur, orci ut vestibulum aliquam, eros nibh tincidunt neque, sed malesuada nunc nunc ac erat. Nulla volutpat ultrices lectus vel convallis. Fusce odio ipsum, pulvinar sed nisl vel, interdum interdum ante. Proin et pharetra turpis. Suspendisse potenti. Sed varius dolor in libero rutrum pellentesque. Duis efficitur lorem ac orci pulvinar sagittis. Morbi eleifend interdum rhoncus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae;', -- Description - nvarchar(2000)
+        39.99 -- Price - decimal(19, 4)
+
+
+EXEC [dbo].[usp_AddProduct]
+        @categoryId,   -- CategoryId - int
+        N'Trampoline', -- Name - nvarchar(250)
+        N'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras nec fringilla nibh. Vivamus vestibulum leo ligula, ac condimentum nunc semper laoreet. Sed sed nunc et nibh mollis tempor. In non ornare libero, eget venenatis magna. Ut faucibus dui sit amet nunc ultricies, vitae facilisis urna facilisis. Praesent consectetur, orci ut vestibulum aliquam, eros nibh tincidunt neque, sed malesuada nunc nunc ac erat. Nulla volutpat ultrices lectus vel convallis. Fusce odio ipsum, pulvinar sed nisl vel, interdum interdum ante. Proin et pharetra turpis. Suspendisse potenti. Sed varius dolor in libero rutrum pellentesque. Duis efficitur lorem ac orci pulvinar sagittis. Morbi eleifend interdum rhoncus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae;', -- Description - nvarchar(2000)
+        127.99 -- Price - decimal(19, 4)
