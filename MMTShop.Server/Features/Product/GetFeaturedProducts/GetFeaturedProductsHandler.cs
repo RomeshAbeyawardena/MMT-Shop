@@ -16,7 +16,10 @@ namespace MMTShop.Server.Features.Product.GetFeaturedProducts
         {
             var timeNow = systemClock.UtcNow;
             var products = await productRepository
-                .GetFeaturedProductsAsync(timeNow.DateTime, timeNow.DateTime, cancellationToken);
+                .GetFeaturedProductsAsync(
+                    timeNow.DateTime, 
+                    timeNow.DateTime, 
+                    cancellationToken);
 
             return new ProductResponse { Products = products };
         }

@@ -15,6 +15,7 @@ namespace MMTShop.Server.Features.Product.GetProductsByCategory
             ICategoryProvider categoryProvider)
         {
             RuleFor(p => p.Category)
+                .NotEmpty()
                 .CustomAsync(EnsureCategoryIsValid);
             this.categoryProvider = categoryProvider;
         }
