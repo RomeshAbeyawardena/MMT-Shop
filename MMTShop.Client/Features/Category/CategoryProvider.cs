@@ -6,12 +6,13 @@ using RestSharp;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using Models = MMTShop.Shared.Models;
 
 namespace MMTShop.Client.Features.Category
 {
     public class CategoryProvider : ProviderBase, ICategoryProvider
     {
-        public async Task<IEnumerable<Shared.Models.Category>> GetCategories(
+        public async Task<IEnumerable<Models.Category>> GetCategories(
             CancellationToken cancellationToken)
         {
             var request = new RestRequest(

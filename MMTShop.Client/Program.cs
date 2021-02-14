@@ -15,7 +15,7 @@ namespace MMTShop.Client
     {
         private static async Task Main(string[] args)
         {
-            //Set as null to use value in appSettings.json
+            //Set as null to use value in appSettings.json, specify a base url to ignore the value in appSettings.json
             Initialize(null);
             
             while(isRunning)
@@ -52,18 +52,19 @@ namespace MMTShop.Client
         {
             return services
                 .AddSingleton<IConfiguration>((s) => new ConfigurationBuilder()
-                    .AddJsonFile("appsettings.json")
+                    .AddJsonFile(GeneralConstants.AppSettingsJsonFileName)
                     .Build())
                 .AddSingleton<ApplicationSettings>()
-                .AddScoped<IRestClient>((s) => new RestClient(baseUrl 
+                .AddSingleton<IRestClient>((s) => new RestClient(baseUrl 
                 ?? s.GetRequiredService<ApplicationSettings>()
                     .BaseUrl))
                 .Scan(sourceSelector => sourceSelector
                     .FromAssemblyOf<Program>()
-                    .AddClasses(c => c.Where(type => ServiceConstants.ClientServiceTypes
-                        .Any(st => type.Name.EndsWith(st))))
+                    .AddClasses(c => c.Where(type => ServiceConstants
+                        .ClientServiceTypes
+                            .Any(st => type.Name.EndsWith(st))))
                     .AsMatchingInterface()
-                    .WithScopedLifetime());
+                    .WithSingletonLifetime());
         }
 
         private static void Initialize(
@@ -79,8 +80,11 @@ namespace MMTShop.Client
 
             actionDictionary = new Dictionary<char, Func<Task<bool>>>
             {
-                { '1', ProductModule.GetFeaturedProducts },
-                { '2', () => CategoryModule.GetCategories(ProductModule.GetProductsByCategory) },
+                { '1', ProductModule
+                    .GetFeaturedProducts },
+                { '2', () => CategoryModule
+                    .GetCategories(ProductModule
+                        .GetProductsByCategory) },
                 { 'q', Quit }
             };
         }
@@ -121,7 +125,7 @@ namespace MMTShop.Client
 
         #endregion
         
-        #region Dependency Injected Properties
+        #region DI Modules
         static IProductModule ProductModule => services
             .GetRequiredService<IProductModule>();
 

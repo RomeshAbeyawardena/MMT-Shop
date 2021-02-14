@@ -6,12 +6,13 @@ using RestSharp;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using Models = MMTShop.Shared.Models;
 
 namespace MMTShop.Client.Features.Product
 {
     public class ProductProvider : ProviderBase, IProductProvider
     {
-        public async Task<IEnumerable<Shared.Models.Product>> GetFeaturedProductsAsync(
+        public async Task<IEnumerable<Models.Product>> GetFeaturedProductsAsync(
             CancellationToken cancellationToken)
         {
             var request = new RestRequest(
@@ -25,7 +26,7 @@ namespace MMTShop.Client.Features.Product
             return response.Products;
         }
 
-        public async Task<IEnumerable<Shared.Models.Product>> GetProductsByCategoryName(
+        public async Task<IEnumerable<Models.Product>> GetProductsByCategoryName(
             string categoryName, 
             CancellationToken cancellationToken)
         {
@@ -38,7 +39,8 @@ namespace MMTShop.Client.Features.Product
             return response.Products;
         }
 
-        public ProductProvider(IRestClient restClient)
+        public ProductProvider(
+            IRestClient restClient)
             : base(restClient)
         {
         }

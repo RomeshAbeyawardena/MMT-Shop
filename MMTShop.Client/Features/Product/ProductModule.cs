@@ -4,6 +4,7 @@ using MMTShop.Shared.Contracts.Provider;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using Models = MMTShop.Shared.Models;
 
 namespace MMTShop.Client.Features.Product
 {
@@ -32,7 +33,7 @@ namespace MMTShop.Client.Features.Product
         }
 
         private static void DisplayProducts(
-            IEnumerable<Shared.Models.Product> products)
+            IEnumerable<Models.Product> products)
         {
             Display(products, "Product", product => 
                 string.Format("\tSku: {0}{4}" +

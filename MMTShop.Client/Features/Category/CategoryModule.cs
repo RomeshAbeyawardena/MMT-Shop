@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-
+using Models = MMTShop.Shared.Models;
 namespace MMTShop.Client.Features.Category
 {
     public class CategoryModule : ModuleBase, ICategoryModule
@@ -40,7 +40,7 @@ namespace MMTShop.Client.Features.Category
         }
 
         public static void DisplayCategories(
-            IEnumerable<Shared.Models.Category> categories)
+            IEnumerable<Models.Category> categories)
         {
             Display(categories, "Category", product =>
                 string.Format("\tName: {0}{1}",
