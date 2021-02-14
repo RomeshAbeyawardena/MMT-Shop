@@ -1,14 +1,7 @@
-﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using MMTShop.Client.Features.Category;
-using MMTShop.Client.Features.Product;
-using MMTShop.Client.Features.Quit;
-using MMTShop.Shared;
+﻿using Microsoft.Extensions.DependencyInjection;
 using MMTShop.Shared.Constants;
 using MMTShop.Shared.Contracts;
-using RestSharp;
 using System;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
