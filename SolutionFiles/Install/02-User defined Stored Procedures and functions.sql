@@ -128,7 +128,7 @@ GO
 -- Description: 1b. Retrieves a list of  
 --					available categories
 -- =============================================
-CREATE PROC [dbo].[Usp_GetCategories]
+CREATE PROC [dbo].[usp_GetCategories]
 AS BEGIN
 	SELECT [Name] FROM [dbo].[Category]
 END
