@@ -1,4 +1,5 @@
 ﻿using MMTShop.Client.Base;
+using MMTShop.Shared.Constants;
 using MMTShop.Shared.Contracts.Modules;
 using MMTShop.Shared.Contracts.Provider;
 using System;
@@ -45,7 +46,7 @@ namespace MMTShop.Client.Features.Category
             Display(categories, "Category", product =>
                 string.Format("\tName: {0}{1}",
                     product.Name,
-                    newLine));
+                    GeneralConstants.NewLine));
         }
 
         public CategoryModule(

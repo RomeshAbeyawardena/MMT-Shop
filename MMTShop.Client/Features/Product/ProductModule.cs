@@ -1,4 +1,5 @@
 ﻿using MMTShop.Client.Base;
+using MMTShop.Shared.Constants;
 using MMTShop.Shared.Contracts.Modules;
 using MMTShop.Shared.Contracts.Provider;
 using System.Collections.Generic;
@@ -44,7 +45,7 @@ namespace MMTShop.Client.Features.Product
                     product.Name,
                     product.Description,
                     product.Price,
-                    newLine));
+                    GeneralConstants.NewLine));
         }
 
         public ProductModule(

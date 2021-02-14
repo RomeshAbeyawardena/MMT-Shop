@@ -1,31 +1,34 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using MMTShop.Client.Features.Category;
+using MMTShop.Client.Features.Product;
+using MMTShop.Client.Features.Quit;
 using MMTShop.Shared;
 using MMTShop.Shared.Constants;
-using MMTShop.Shared.Contracts.Modules;
+using MMTShop.Shared.Contracts;
 using RestSharp;
 using System;
-using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace MMTShop.Client
 {
     class Program
     {
-        private static async Task Main(string[] args)
+        private static async Task Main()
         {
             //Set as null to use value in appSettings.json, specify a base url to ignore the value in appSettings.json
             Initialize(null);
             
-            while(isRunning)
+            while(applicationState.IsRunning)
             {
                 try
                 {
                     Console
                         .WriteLine(
                         "Welcome to MMT Shop.{0}Please select an option{0}", 
-                        newLine);
+                        GeneralConstants.NewLine);
 
                     DisplayOptions();
 
@@ -58,6 +61,10 @@ namespace MMTShop.Client
                 .AddSingleton<IRestClient>((s) => new RestClient(baseUrl 
                 ?? s.GetRequiredService<ApplicationSettings>()
                     .BaseUrl))
+                .AddSingleton<ICommandDispatcher<char>, MenuCommandDispatcher>()
+                .AddSingleton<CategoryDispatcher>()
+                .AddSingleton<ProductDispatcher>()
+                .AddSingleton<QuitDispatcher>()
                 .Scan(sourceSelector => sourceSelector
                     .FromAssemblyOf<Program>()
                     .AddClasses(c => c.Where(type => ServiceConstants
@@ -70,23 +77,12 @@ namespace MMTShop.Client
         private static void Initialize(
             string baseUrl)
         {
-            isRunning = true;
             var servicesCollection = new ServiceCollection();
             
             services = RegisterServices(
                 servicesCollection, 
                 baseUrl)
                 .BuildServiceProvider();
-
-            actionDictionary = new Dictionary<char, Func<Task<bool>>>
-            {
-                { '1', ProductModule
-                    .GetFeaturedProducts },
-                { '2', () => CategoryModule
-                    .GetCategories(ProductModule
-                        .GetProductsByCategory) },
-                { 'q', Quit }
-            };
         }
 
         #endregion
@@ -97,47 +93,45 @@ namespace MMTShop.Client
             Console.ReadKey(true);
         }
         
-        private static Task<bool> Quit()
-        {
-            isRunning = false;
-            return Task.FromResult(false);
-        }
-
         private static void DisplayOptions()
         {
-            Console.WriteLine("1. Display featured products{0}" +
+            Console.WriteLine(
+                "1. Display featured products{0}" +
                 "2. Display categories and get products for a specific category{0}" +
-                "q. Quit", newLine);
+                "q. Quit", GeneralConstants.NewLine);
         }
 
         private static async Task<bool> ParseInput(
             char input)
         {
-            const string InvalidOptionExceptionMessage = "Input must be a number between 1-2 or q to quit";
-
-            if(!actionDictionary.TryGetValue(input, out var action))
-            {
-                throw new InvalidOperationException(InvalidOptionExceptionMessage);
+            try 
+            { 
+                return await CommandDispatcher
+                    .InvokeDispatcherAsync<bool>(
+                        input, 
+                        applicationState,
+                        CancellationToken.None);
             }
-
-            return await action.Invoke();
+            catch(NullReferenceException ex)
+            {
+                throw new InvalidOperationException(
+                    "Input must be a number between 1-2 or q to quit", 
+                    ex);
+            }
         }
 
         #endregion
         
         #region DI Modules
-        static IProductModule ProductModule => services
-            .GetRequiredService<IProductModule>();
 
-        static ICategoryModule CategoryModule => services
-            .GetRequiredService<ICategoryModule>();
+        private static ICommandDispatcher<char> CommandDispatcher => services
+            .GetRequiredService<ICommandDispatcher<char>>();
         #endregion
 
         #region Fields
-        static Dictionary<char, Func<Task<bool>>> actionDictionary;
-        static bool isRunning = false;
-        static readonly string newLine = Environment.NewLine;
-        static IServiceProvider services;
+        private static readonly ApplicationState applicationState = new ApplicationState { IsRunning = true } ;
+        
+        private static IServiceProvider services;
         #endregion
     }
 }

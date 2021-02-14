@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MMTShop.Shared.Constants;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -20,15 +21,13 @@ namespace MMTShop.Client.Base
                     itemType,
                     itemIndex + 1, 
                     itemCount,
-                    newLine);
+                    GeneralConstants.NewLine);
 
                 Console.WriteLine(
                     itemDisplayFormat(item));
 
-                Console.WriteLine("-------------------------------{0}", newLine);
+                Console.WriteLine("-------------------------------{0}", GeneralConstants.NewLine);
             }
         }
-
-        public static readonly string newLine = Environment.NewLine;
     }
 }
