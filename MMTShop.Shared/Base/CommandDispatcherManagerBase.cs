@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace MMTShop.Shared.Base
 {
-    public class CommandDispatcherBase<TCommand> 
-        : ICommandDispatcher<TCommand>
+    public class CommandDispatcherManagerBase<TCommand> 
+        : ICommandDispatcherManager<TCommand>
     {
         public IDispatcher GetDispatcher(
             TCommand command)
@@ -69,7 +69,7 @@ namespace MMTShop.Shared.Base
                 .InvokeAsync(state, cancellationToken);
         }
 
-        protected CommandDispatcherBase(
+        protected CommandDispatcherManagerBase(
             IServiceProvider serviceProvider)
         {
             this.serviceProvider =  serviceProvider;

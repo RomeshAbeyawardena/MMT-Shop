@@ -61,7 +61,8 @@ as simple as possible.
       as a HTTP client to interact with the API. 
       Each feature is contained within a module and the Program.cs is considered 
       as the director that calls upon the modules when they are required using
-      dependency injection.
+      dependency injection. Please read the Readme.md contained with the client 
+      MMT.Shop.Client directory for further information.
 - MMTShop.Server
     - The API itself is implemented here, using Mediatr to 'glue' together 
       request and response object behaviours following the Mediator 

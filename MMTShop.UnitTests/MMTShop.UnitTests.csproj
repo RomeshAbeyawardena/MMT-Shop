@@ -14,6 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\MMTShop.Client\MMTShop.Client.csproj" />
     <ProjectReference Include="..\MMTShop.Server\MMTShop.Server.csproj" />
   </ItemGroup>
 

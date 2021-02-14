@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace MMTShop.Shared.Contracts
 {
-    public interface ICommandDispatcher<TCommand>
+    public interface ICommandDispatcherManager<TCommand>
     {
         IDispatcher GetDispatcher(
             TCommand command);

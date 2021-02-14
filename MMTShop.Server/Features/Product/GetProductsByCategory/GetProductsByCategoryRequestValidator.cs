@@ -30,7 +30,9 @@ namespace MMTShop.Server.Features.Product.GetProductsByCategory
             if(!categories.Any(c => c.Name
                 .Equals(categoryName, StringComparison.InvariantCultureIgnoreCase)))
             {
-                context.AddFailure(nameof(categoryName), "Category not found");
+                context.AddFailure(
+                    nameof(categoryName), 
+                    "Category not found");
             }
         }
 

@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace MMTShop.UnitTests
+namespace MMTShop.UnitTests.Validation
 {
     public class GetProductsByCategoryRequestValidatorTests
     {
@@ -21,38 +21,55 @@ namespace MMTShop.UnitTests
         [Test]
         public void Validate_should_fail_when_category_can_not_be_found()
         {
+            //arrange
             var data = new [] { 
                 new Category { Name = "Garden" },
                 new Category { Name = "Fitness" },
                 new Category { Name = "Garden" }
             };
 
-            categoryProviderMock.Setup(a => a.GetCategories(It.IsAny<CancellationToken>()))
-                .Returns(Task.FromResult<IEnumerable<Category>>(data));
-            var validationResult = sut.Validate(new GetProductsByCategoryRequest { Category = "Home" });
+            //act
+            categoryProviderMock
+                .Setup(a => a.GetCategories(It.IsAny<CancellationToken>()))
+                    .Returns(Task.FromResult<IEnumerable<Category>>(data));
 
+            var validationResult = sut
+                .Validate(
+                    new GetProductsByCategoryRequest { Category = "Home" });
+
+            //assert
             Assert.False(validationResult.IsValid);
         }
 
         [Test]
-        public void Validate_should_fail_when_requested_category_is_null()
+        public void Validate_should_call_ICategoryProvider_GetCategories_and_fail_when_requested_category_is_null()
         {
+            //arrange
             var data = new [] { 
                 new Category { Name = "Garden" },
                 new Category { Name = "Fitness" },
                 new Category { Name = "Garden" }
             };
 
-            categoryProviderMock.Setup(a => a.GetCategories(It.IsAny<CancellationToken>()))
-                .Returns(Task.FromResult<IEnumerable<Category>>(data));
-            var validationResult = sut.Validate(new GetProductsByCategoryRequest());
+            categoryProviderMock.
+                Setup(a => a.GetCategories(It.IsAny<CancellationToken>()))
+                    .Returns(Task.FromResult<IEnumerable<Category>>(data))
+                    .Verifiable();
 
+            //act
+            var validationResult = sut
+                .Validate(
+                    new GetProductsByCategoryRequest());
+
+            //assert
+            categoryProviderMock.Verify();
             Assert.False(validationResult.IsValid);
         }
 
         [Test]
         public void Validate_should_pass_when_category_exists()
         {
+            //arrange
             var data = new [] { 
                 new Category { Name = "Garden" },
                 new Category { Name = "Fitness" },
@@ -60,11 +77,18 @@ namespace MMTShop.UnitTests
                 new Category { Name = "Home" }
             };
 
-            categoryProviderMock.Setup(a => a.GetCategories(It.IsAny<CancellationToken>()))
-                .Returns(Task.FromResult<IEnumerable<Category>>(data));
-            var validationResult = sut.Validate(new GetProductsByCategoryRequest { Category = "Garden" });
+            categoryProviderMock
+                .Setup(a => a.GetCategories(It.IsAny<CancellationToken>()))
+                    .Returns(Task.FromResult<IEnumerable<Category>>(data));
 
-            Assert.True(validationResult.IsValid);
+            //act
+            var validationResult = sut
+                .Validate(
+                    new GetProductsByCategoryRequest { Category = "Garden" });
+
+            //assert
+            Assert.True(
+                validationResult.IsValid);
         }
 
         private GetProductsByCategoryRequestValidator sut;

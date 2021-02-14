@@ -65,7 +65,7 @@ namespace MMTShop.Client
         {
             try 
             { 
-                return await CommandDispatcher
+                return await CommandDispatcherManager
                     .InvokeDispatcherAsync<bool>(
                         input, 
                         applicationState,
@@ -82,8 +82,8 @@ namespace MMTShop.Client
         #endregion
         
         #region Properties
-        private static ICommandDispatcher<char> CommandDispatcher => services
-            .GetRequiredService<ICommandDispatcher<char>>();
+        private static ICommandDispatcherManager<char> CommandDispatcherManager => services
+            .GetRequiredService<ICommandDispatcherManager<char>>();
         #endregion
 
         #region Fields

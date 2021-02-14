@@ -16,7 +16,7 @@ namespace MMTShop.Server.Base
     public class MediatrControllerBase 
         : ControllerBase
     {
-        protected IMediator Mediator => HttpContext.RequestServices.GetRequiredService<IMediator>();
+        protected IMediator Mediator => mediator ??= HttpContext.RequestServices.GetRequiredService<IMediator>();
 
         public async Task<IActionResult> SendAsync(
             object request, 
@@ -56,5 +56,12 @@ namespace MMTShop.Server.Base
             return BadRequest(ModelState);
         }
 
+        public MediatrControllerBase(
+            IMediator mediator = null)
+        {
+            this.mediator = mediator;
+        }
+
+        private IMediator mediator;
     }
 }

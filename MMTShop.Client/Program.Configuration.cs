@@ -25,7 +25,7 @@ namespace MMTShop.Client
                 .AddSingleton<IRestClient>((s) => new RestClient(baseUrl 
                     ?? s.GetRequiredService<ApplicationSettings>()
                         .BaseUrl))
-                .AddSingleton<ICommandDispatcher<char>, MenuCommandDispatcher>()
+                .AddSingleton<ICommandDispatcherManager<char>, MenuCommandDispatcherManager>()
                 .AddSingleton<CategoryDispatcher>()
                 .AddSingleton<ProductDispatcher>()
                 .AddSingleton<QuitDispatcher>()

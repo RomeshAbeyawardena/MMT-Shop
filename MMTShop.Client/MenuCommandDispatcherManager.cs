@@ -6,10 +6,10 @@ using MMTShop.Shared.Base;
 
 namespace MMTShop.Client
 {
-    public class MenuCommandDispatcher 
-        : CommandDispatcherBase<char>
+    public class MenuCommandDispatcherManager 
+        : CommandDispatcherManagerBase<char>
     {
-        public MenuCommandDispatcher(
+        public MenuCommandDispatcherManager(
             IServiceProvider serviceProvider) 
             : base(serviceProvider)
         {
