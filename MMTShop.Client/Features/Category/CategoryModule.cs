@@ -11,7 +11,8 @@ namespace MMTShop.Client.Features.Category
 {
     public class CategoryModule : ModuleBase, ICategoryModule
     {
-        public async Task<bool> GetCategories(Func<string, Task<bool>> getProductsByCategory)
+        public async Task<bool> GetCategories(
+            Func<string, Task<bool>> getProductsByCategory)
         {
             var categories = await categoryProvider
                 .GetCategories(CancellationToken.None);

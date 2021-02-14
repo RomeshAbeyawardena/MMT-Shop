@@ -13,12 +13,9 @@ namespace MMTShop.Client
 {
     class Program
     {
-        
         private static async Task Main(string[] args)
         {
-            //this could be further enhanced so the base url could come from 
-            //an app settings file instead of a constant.
-
+            //Set as null to use value in appSettings.json
             Initialize(null);
             
             while(isRunning)
@@ -124,7 +121,7 @@ namespace MMTShop.Client
 
         #endregion
         
-        #region Properties
+        #region Dependency Injected Properties
         static IProductModule ProductModule => services
             .GetRequiredService<IProductModule>();
 
