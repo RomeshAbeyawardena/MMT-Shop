@@ -20,9 +20,17 @@ namespace MMTShop.Client.Features.ServerCheck
             object state, 
             CancellationToken cancellationToken)
         {
+            var applicationState = GetApplicationState(state);
+
+            Console.WriteLine(
+                "[Attempt: {0}] Checking MMT Shop server status...", 
+                applicationState
+                    .FailedAccessAttempts + 1);
+
             while (!await serverCheckProvider
                 .IsServerLive(cancellationToken))
             {
+                applicationState.FailedAccessAttempts++;
                 var retryInterval = applicationSettings
                     .ClientRetryIntervalInSeconds;
 
@@ -38,6 +46,11 @@ namespace MMTShop.Client.Features.ServerCheck
                     cancellationToken);
             }
 
+            Console.WriteLine(
+                "MMT Shop Server is OK!");
+            applicationState
+                .FailedAccessAttempts = 0;
+
             return true;
         }
 
@@ -48,6 +61,10 @@ namespace MMTShop.Client.Features.ServerCheck
             this.applicationSettings = applicationSettings;
             this.serverCheckProvider = serverCheckProvider;
         }
+
+        private ApplicationState GetApplicationState(object state) 
+            => (ApplicationState)state ?? 
+                throw new InvalidCastException("Unable to cast state object in ApplicationState");
 
         private readonly ApplicationSettings applicationSettings;
         private readonly IServerCheckProvider serverCheckProvider;
