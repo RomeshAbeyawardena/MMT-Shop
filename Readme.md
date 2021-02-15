@@ -45,7 +45,7 @@ If you had to change the port, the BaseUrl property in the  *appsettings.json*
 file in the MMTShop.Client project will need to be updated to match in order
 for the MMT.Client to work in harmony with MMT.Server.
 
-The client will start in the same window immediatly after.
+The client will start in the initial Powershell window immediatly after.
 
 #### Additional Notes
 The above Powershell scripts are not signed, you will need to temporarily
