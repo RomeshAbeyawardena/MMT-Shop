@@ -35,17 +35,17 @@ select, insert and execute permissions on all objects after running the database
 schema and function/stored procedure scripts. 
 
 ### Starting the server and client applications
-Open the solution directory and right-click *Start-Server.ps1* and click **Run
-with Powershell**, the server should run on the default ports 5000 and 5001 
-(HTTPS). You may need to change these in the project properties in Visual Studio,
-if this conflicts with anything else you may have set up.
+Open the solution directory and right-click *Start.ps1* and click **Run
+with Powershell**, the server will pop up in a separate Powershell window and 
+should run on the default ports 5000 and 5001 (HTTPS). You may need to change 
+these in the project properties in Visual Studio, if this conflicts with 
+anything else you may have set up.
 
 If you had to change the port, the BaseUrl property in the  *appsettings.json* 
 file in the MMTShop.Client project will need to be updated to match in order
 for the MMT.Client to work in harmony with MMT.Server.
 
-The client can be started in the same way using the *Start-Client.ps1* file 
-located in the same directory.
+The client will start in the same window immediatly after.
 
 #### Additional Notes
 The above Powershell scripts are not signed, you will need to temporarily
