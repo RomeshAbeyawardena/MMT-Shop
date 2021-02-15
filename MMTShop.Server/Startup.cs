@@ -14,6 +14,8 @@ using MMTShop.Server.Pipelines.Behaviors;
 using MMTShop.Shared;
 using MMTShop.Shared.Constants;
 using MMTShop.Shared.Contracts;
+using MMTShop.Shared.Contracts.Services;
+using MMTShop.Shared.Services;
 
 namespace MMTShop.Server
 {
@@ -32,6 +34,7 @@ namespace MMTShop.Server
                 .AddSingleton<ApplicationSettings>()
                 .AddSingleton<ISystemClock, SystemClock>()
                 .AddSingleton<IDatabaseQueryProvider, DatabaseQueryProvider>()
+                .AddSingleton<ICategoryService, CategoryService>()
                 .Scan(sourceSelector => sourceSelector
                     .FromAssemblies(currentAssembly)
                     .AddClasses(c => c.Where(type => ServiceConstants.ServerServiceTypes

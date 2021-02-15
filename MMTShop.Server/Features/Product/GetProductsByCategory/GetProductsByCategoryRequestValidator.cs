@@ -1,8 +1,7 @@
 ﻿using FluentValidation;
 using FluentValidation.Validators;
 using MMTShop.Shared.Contracts.Provider;
-using System;
-using System.Linq;
+using MMTShop.Shared.Contracts.Services;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -12,12 +11,14 @@ namespace MMTShop.Server.Features.Product.GetProductsByCategory
         : AbstractValidator<GetProductsByCategoryRequest>
     {
         public GetProductsByCategoryRequestValidator(
-            ICategoryProvider categoryProvider)
+            ICategoryProvider categoryProvider,
+            ICategoryService categoryService)
         {
             RuleFor(p => p.Category)
                 .NotEmpty()
                 .CustomAsync(EnsureCategoryIsValid);
             this.categoryProvider = categoryProvider;
+            this.categoryService = categoryService;
         }
 
         private async Task EnsureCategoryIsValid(
@@ -27,8 +28,10 @@ namespace MMTShop.Server.Features.Product.GetProductsByCategory
         {
             var categories = await categoryProvider.GetCategoriesAsync(cancellationToken);
 
-            if(!categories.Any(c => c.Name
-                .Equals(categoryName, StringComparison.InvariantCultureIgnoreCase)))
+            var category = categoryService
+                .GetCategory(categories, categoryName);
+
+            if(category == null)
             {
                 context.AddFailure(
                     nameof(categoryName), 
@@ -37,5 +40,6 @@ namespace MMTShop.Server.Features.Product.GetProductsByCategory
         }
 
         private readonly ICategoryProvider categoryProvider;
+        private readonly ICategoryService categoryService;
     }
 }

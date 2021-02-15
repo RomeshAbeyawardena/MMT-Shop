@@ -2,9 +2,9 @@
 using MMTShop.Shared.Constants;
 using MMTShop.Shared.Contracts.Modules;
 using MMTShop.Shared.Contracts.Provider;
+using MMTShop.Shared.Contracts.Services;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Models = MMTShop.Shared.Models;
@@ -26,9 +26,12 @@ namespace MMTShop.Client.Features.Category
             var categoryName = Console.ReadLine();
             if (!string.IsNullOrWhiteSpace(categoryName))
             {
-                if (categories
-                    .Any(category => category.Name.Equals(categoryName,
-                        StringComparison.InvariantCultureIgnoreCase)))
+                var category = categoryService
+                    .GetCategory(
+                        categories, 
+                        categoryName);
+
+                if (category != null)
                 {
                     await getProductsByCategory(categoryName);
                     return true;
@@ -52,11 +55,13 @@ namespace MMTShop.Client.Features.Category
         }
 
         public CategoryModule(
-            ICategoryProvider categoryProvider)
+            ICategoryProvider categoryProvider, ICategoryService categoryService)
         {
             this.categoryProvider = categoryProvider;
+            this.categoryService = categoryService;
         }
 
         private readonly ICategoryProvider categoryProvider;
+        private readonly ICategoryService categoryService;
     }
 }

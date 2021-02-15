@@ -1,11 +1,10 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using MMTShop.Client.Features.Category;
-using MMTShop.Client.Features.Product;
-using MMTShop.Client.Features.Quit;
 using MMTShop.Shared;
 using MMTShop.Shared.Constants;
 using MMTShop.Shared.Contracts;
+using MMTShop.Shared.Contracts.Services;
+using MMTShop.Shared.Services;
 using RestSharp;
 using System.Linq;
 
@@ -25,6 +24,7 @@ namespace MMTShop.Client
                 .AddSingleton<IRestClient>((s) => new RestClient(baseUrl 
                     ?? s.GetRequiredService<ApplicationSettings>()
                         .BaseUrl))
+                .AddSingleton<ICategoryService, CategoryService>()
                 .AddSingleton<ICommandDispatcher<char>, MenuCommandDispatcher>()
                 .Scan(sourceSelector => sourceSelector
                     .FromAssemblyOf<Program>()
