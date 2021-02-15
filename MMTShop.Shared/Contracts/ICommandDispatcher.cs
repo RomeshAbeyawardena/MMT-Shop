@@ -5,26 +5,26 @@ namespace MMTShop.Shared.Contracts
 {
     public interface ICommandDispatcher<TCommand>
     {
-        IDispatcherHandler GetDispatcher(
+        IDispatcherHandler GetDispatcherHandler(
             TCommand command);
 
-        IDispatcherHandler<TResult> GetDispatcher<TResult>(
+        IDispatcherHandler<TResult> GetDispatcherHandler<TResult>(
             TCommand command);
 
-        object InvokeDispatcher(
+        object Invoke(
             TCommand command,
             object state);
 
-        TResult InvokeDispatcher<TResult>(
+        TResult Invoke<TResult>(
             TCommand command,
             object state);
 
-        Task<object> InvokeDispatcherAsync(
+        Task<object> InvokeAsync(
             TCommand command, 
             object state, 
             CancellationToken cancellationToken);
 
-        Task<TResult> InvokeDispatcherAsync<TResult>(
+        Task<TResult> InvokeAsync<TResult>(
             TCommand command, 
             object state, 
             CancellationToken cancellationToken);

@@ -66,7 +66,7 @@ namespace MMTShop.Client
             try 
             { 
                 return await CommandDispatcher
-                    .InvokeDispatcherAsync<bool>(
+                    .InvokeAsync<bool>(
                         input, 
                         applicationState,
                         CancellationToken.None);

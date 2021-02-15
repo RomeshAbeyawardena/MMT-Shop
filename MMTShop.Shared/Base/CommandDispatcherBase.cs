@@ -9,7 +9,7 @@ namespace MMTShop.Shared.Base
     public class CommandDispatcherBase<TCommand> 
         : ICommandDispatcher<TCommand>
     {
-        public IDispatcherHandler GetDispatcher(
+        public IDispatcherHandler GetDispatcherHandler(
             TCommand command)
         {
             if(DispatcherDictionary
@@ -22,10 +22,10 @@ namespace MMTShop.Shared.Base
             throw new NullReferenceException("Dispatcher not found");
         }
 
-        public IDispatcherHandler<TResult> GetDispatcher<TResult>(
+        public IDispatcherHandler<TResult> GetDispatcherHandler<TResult>(
             TCommand command)
         {
-            var dispatcher = GetDispatcher(command);
+            var dispatcher = GetDispatcherHandler(command);
 
             if(dispatcher is IDispatcherHandler<TResult> genericDispatcher)
             {
@@ -35,37 +35,37 @@ namespace MMTShop.Shared.Base
             throw new InvalidOperationException($"Dispatcher does not return a type of {nameof(TResult)}");
         }
 
-        public object InvokeDispatcher(
+        public object Invoke(
             TCommand command,
             object state)
         {
-            return GetDispatcher(command)
+            return GetDispatcherHandler(command)
                 .Invoke(state);
         }
 
-        public TResult InvokeDispatcher<TResult>(
+        public TResult Invoke<TResult>(
             TCommand command,
             object state)
         {
-            return GetDispatcher<TResult>(command)
+            return GetDispatcherHandler<TResult>(command)
                 .Invoke(state);
         }
 
-        public Task<object> InvokeDispatcherAsync(
+        public Task<object> InvokeAsync(
             TCommand command,
             object state,
             CancellationToken cancellationToken)
         {
-            return GetDispatcher(command)
+            return GetDispatcherHandler(command)
                 .InvokeAsync(state, cancellationToken);
         }
 
-        public Task<TResult> InvokeDispatcherAsync<TResult>(
+        public Task<TResult> InvokeAsync<TResult>(
             TCommand command, 
             object state,
             CancellationToken cancellationToken)
         {
-            return GetDispatcher<TResult>(command)
+            return GetDispatcherHandler<TResult>(command)
                 .InvokeAsync(state, cancellationToken);
         }
 

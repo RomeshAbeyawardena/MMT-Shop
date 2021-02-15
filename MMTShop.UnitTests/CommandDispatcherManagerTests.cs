@@ -46,7 +46,7 @@ namespace MMTShop.UnitTests
         {
             //act
             var dispatcher = sut
-                .GetDispatcher<bool>('1');
+                .GetDispatcherHandler<bool>('1');
 
             //assert
             Assert.AreSame(
@@ -60,7 +60,7 @@ namespace MMTShop.UnitTests
 
             //act
             dispatcher = sut
-                .GetDispatcher<bool>('2');
+                .GetDispatcherHandler<bool>('2');
 
             //assert
             Assert.AreSame(
@@ -74,7 +74,7 @@ namespace MMTShop.UnitTests
 
             //act
             dispatcher = sut
-                .GetDispatcher<bool>('q');
+                .GetDispatcherHandler<bool>('q');
 
             //assert
             Assert.AreSame(
@@ -94,7 +94,7 @@ namespace MMTShop.UnitTests
             Assert
                 .Throws<NullReferenceException>(
                     () =>  {
-                            sut.GetDispatcher<bool>('m');
+                            sut.GetDispatcherHandler<bool>('m');
                     });
         }
 
