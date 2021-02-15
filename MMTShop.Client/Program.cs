@@ -54,10 +54,12 @@ namespace MMTShop.Client
         private static void DisplayOptions()
         {
             Console
-                .WriteLine("Welcome to MMT Shop.{0}Please select an option{0}" +
-                "1. Display featured products{0}" +
-                "2. Display categories and get products for a specific category{0}" +
-                "q. Quit", FormatConstants.NewLine);
+                .WriteLine(
+                    "Welcome to MMT Shop.{0}Please select an option{0}" +
+                    "1. Display featured products{0}" +
+                    "2. Display categories and get products for a specific category{0}" +
+                    "q. Quit", 
+                    FormatConstants.NewLine);
         }
 
         private static async Task<bool> ParseInput(
