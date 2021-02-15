@@ -26,9 +26,11 @@ namespace MMTShop.Client.Features.ServerCheck
                 var retryInterval = applicationSettings
                     .ClientRetryIntervalInSeconds;
 
-                Thread.Sleep(retryInterval);
+                Thread.Sleep(
+                    retryInterval);
 
-                Console.WriteLine("MMT Shop Server unavailable. Retrying in {0} seconds...", 
+                Console.WriteLine(
+                    "MMT Shop Server unavailable. Retrying in {0} seconds...", 
                     retryInterval);
 
                 return await InvokeAsync(
