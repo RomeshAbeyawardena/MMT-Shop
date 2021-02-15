@@ -1,11 +1,15 @@
-﻿using System.Threading.Tasks;
+﻿using System.Threading;
+using System.Threading.Tasks;
 
 namespace MMTShop.Shared.Contracts.Modules
 {
     public interface IProductModule
     {
-        Task<bool> DisplayFeaturedProducts();
+        Task<bool> DisplayFeaturedProducts(
+            CancellationToken cancellationToken);
+
         Task<bool> DisplayProductsByCategory(
-            string categoryName);
+            string categoryName,
+            CancellationToken cancellationToken);
     }
 }

@@ -14,13 +14,17 @@ namespace MMTShop.Client.Features.Category
             throw new NotImplementedException();
         }
 
-        public override Task<bool> InvokeAsync(
+        public override async Task<bool> InvokeAsync(
             object state, 
             CancellationToken cancellationToken)
         {
-            return categoryModule
-                    .DisplayCategories(productModule
-                        .DisplayProductsByCategory);
+            return await categoryModule
+                    .DisplayCategories(
+                        async(categoryName) => await productModule
+                            .DisplayProductsByCategory(
+                                categoryName, 
+                                cancellationToken),
+                        cancellationToken);
         }
 
         public CategoryDispatcherHandler(
