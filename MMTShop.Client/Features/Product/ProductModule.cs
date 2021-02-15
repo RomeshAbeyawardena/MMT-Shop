@@ -16,7 +16,8 @@ namespace MMTShop.Client.Features.Product
             CancellationToken cancellationToken)
         {
             var products = await productProvider
-                .GetFeaturedProductsAsync(CancellationToken.None);
+                .GetFeaturedProductsAsync(
+                    CancellationToken.None);
 
             DisplayProducts(products);
             return true;
@@ -31,7 +32,8 @@ namespace MMTShop.Client.Features.Product
                     categoryName,
                     CancellationToken.None);
 
-            DisplayProducts(products);
+            DisplayProducts(
+                products);
 
             return true;
         }
@@ -39,11 +41,14 @@ namespace MMTShop.Client.Features.Product
         private static void DisplayProducts(
             IEnumerable<Models.Product> products)
         {
-            Display(products, "Product", product => 
-                string.Format("\tSku: {0}{4}" +
-                    "\tName: {1}{4}" +
-                    "\tDescription: {2}{4}" +
-                    "\tPrice: {3:c2}{4}",
+            Display(
+                products, 
+                "Product", 
+                product => 
+                    string.Format("\tSku: {0}{4}" +
+                        "\tName: {1}{4}" +
+                        "\tDescription: {2}{4}" +
+                        "\tPrice: {3:c2}{4}",
                     product.Sku,
                     product.Name,
                     product.Description,

@@ -30,7 +30,9 @@ namespace MMTShop.Client.Features.ServerCheck
             while (!await serverCheckProvider
                 .IsServerLive(cancellationToken))
             {
-                applicationState.FailedAccessAttempts++;
+                applicationState
+                    .FailedAccessAttempts++;
+
                 var retryInterval = applicationSettings
                     .ClientRetryIntervalInSeconds;
 
@@ -48,6 +50,7 @@ namespace MMTShop.Client.Features.ServerCheck
 
             Console.WriteLine(
                 "MMT Shop Server is OK!");
+
             applicationState
                 .FailedAccessAttempts = 0;
 

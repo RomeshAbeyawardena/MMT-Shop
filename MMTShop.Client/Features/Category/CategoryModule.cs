@@ -21,7 +21,8 @@ namespace MMTShop.Client.Features.Category
                 .GetCategoriesAsync(CancellationToken.None);
 
             DisplayCategories(categories);
-            Console.WriteLine("Enter the category you wish to view products for:");
+            Console.WriteLine(
+                "Enter the category you wish to view products for:");
 
             var categoryName = Console.ReadLine();
             if (!string.IsNullOrWhiteSpace(categoryName))
@@ -33,22 +34,27 @@ namespace MMTShop.Client.Features.Category
 
                 if(category == null)
                 {
-                    throw new NullReferenceException("Category not found");
+                    throw new NullReferenceException(
+                        "Category not found");
                 }
 
                 return categoryName;
             }
 
-            throw new InvalidOperationException("No category selected");
+            throw new InvalidOperationException(
+                "No category selected");
         }
 
         public static void DisplayCategories(
             IEnumerable<Models.Category> categories)
         {
-            Display(categories, "Category", product =>
-                string.Format("\tName: {0}{1}",
-                    product.Name,
-                    FormatConstants.NewLine));
+            Display(
+                categories, 
+                "Category", 
+                product =>
+                    string.Format("\tName: {0}{1}",
+                        product.Name,
+                        FormatConstants.NewLine));
         }
 
         public CategoryModule(

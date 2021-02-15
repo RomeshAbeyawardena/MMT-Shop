@@ -17,7 +17,8 @@ namespace MMTShop.Client.Features.ServerCheck
                     request, 
                     cancellationToken);
 
-            return response.IsSuccessful;
+            return response
+                .IsSuccessful;
         }
 
         public ServerCheckProvider(
