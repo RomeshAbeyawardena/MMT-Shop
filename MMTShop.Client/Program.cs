@@ -16,12 +16,18 @@ namespace MMTShop.Client
             //Set as null to use value in appSettings.json, specify a base url to ignore the value in appSettings.json
             Initialize(
                 null);
-            
+            Console.WriteLine("Welcome to MMT Shop.{0}", 
+                FormatConstants.NewLine);
+
             while(applicationState.IsRunning)
             {
                 try
                 {
-                    
+                    await MenuCommandDispatcher.InvokeAsync<bool>(
+                        GeneralConstants.ServerCheckCommandCharacter, 
+                        applicationState, 
+                        CancellationToken.None);
+
                     DisplayOptions();
 
                     if(await ParseInput(
@@ -58,7 +64,7 @@ namespace MMTShop.Client
         {
             Console
                 .WriteLine(
-                    "Welcome to MMT Shop.{0}Please select an option{0}" +
+                    "Please select an option{0}" +
                     "1. Display featured products{0}" +
                     "2. Display categories and get products for a specific category{0}" +
                     "q. Quit", 

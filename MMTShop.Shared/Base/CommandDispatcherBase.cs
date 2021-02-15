@@ -16,8 +16,10 @@ namespace MMTShop.Shared.Base
             if(DispatcherDictionary
                 .TryGetValue(command, out var dispatcher))
             {
-                return serviceProvider
-                    .GetService(dispatcher) as IDispatcherHandler;
+                var handler = serviceProvider
+                    .GetService(dispatcher) ;
+
+                return handler as IDispatcherHandler;
             }
 
             throw new DispatcherNotFoundException(
