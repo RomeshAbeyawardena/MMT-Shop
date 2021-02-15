@@ -4,7 +4,7 @@
 
 This section outlines the requirements to build and run the application
 
-### Development enviroment
+### Development environment
 The project was built using vanilla (without extensions) 
 Visual Studio 2019 (v16.8.4) targetting .NET 5 (v5.0.103) - it should build 
 and compile with any version of .NET 5.
@@ -30,6 +30,10 @@ for more information.
 As long as the connection string is valid and all included data scripts have
 been run the application should work without a hitch.
 
+Ensure the database user is running with full privileges or manually allow
+select, insert and execute permissions on all objects after running the database, 
+schema and function/stored procedure scripts. 
+
 ### Starting the server and client applications
 Open the solution directory and right-click *Start-Server.ps1* and click **Run
 with Powershell**, the server should run on the default ports 5000 and 5001 
@@ -44,11 +48,11 @@ The client can be started in the same way using the *Start-Client.ps1* file
 located in the same directory.
 
 #### Additional Notes
-The above Powershell files are not signed, you will need to temporarily
+The above Powershell scripts are not signed, you will need to temporarily
 allow execution of unsigned Powershell scripts using *Set-ExecutionPolicy* 
 before running the aforementioned scripts.
 
-Further information on this is available on the Microsoft Documentation website 
+Further information on this is available on the Microsoft documentation website 
 
 [Set-ExecutionPolicy (Microsoft.PowerShell.Security) - PowerShell](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.security/set-executionpolicy?view=powershell-7.1)
 
@@ -59,10 +63,10 @@ as simple as possible.
 - MMTShop.Client
     - The console application is implemented here using the RestSharp library 
       as a HTTP client to interact with the API. 
-      Each feature is contained within a module and the Program.cs is considered 
+      Each module is contained within a feature and the Program.cs is considered 
       as the director that calls upon the modules when they are required using
       dependency injection. Please read the Readme.md contained within the client 
-      MMT.Shop.Client directory for further information.
+      MMTShop.Client directory for further information.
 - MMTShop.Server
     - The API itself is implemented here, using Mediatr to 'glue' together 
       request and response object behaviours following the Mediator 
@@ -99,11 +103,12 @@ and get categories logic was not using duplicate code.
 Another optimisation completed was to allow the client and server to share 
 response objects to reduce effort when requirements change, such as 
 paging may be required and we need to output a total number of rows 
-and pages for a paging component to generate a pager on the MMT website. 
+and pages for a paging component to generate a pager on the MMT Shop website
+for example. 
 
 A further enhancement would be to cache the categories using a form of
 distributed caching implementation, such as Redis cache, to reduce the 
-resources used to constantly connect to the database each time for this
+resources used to constantly connect to the database each time, for this
 data.
 
 ---
@@ -130,8 +135,8 @@ data.
 
 ### MMT Client
 
-The client as requested is a console application implemented 
-with a simple menu interface, outlined below
+The client as requested, is a console application implemented 
+with a simple menu interface, outlined below.
 
 Welcome to MMT Shop.
 Please select an option

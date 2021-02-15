@@ -6,7 +6,8 @@ IF DB_ID('MMTShop') IS NOT NULL
 BEGIN --ensures database is wiped out if it exists for a clean installation
 	DROP DATABASE MMTShop
 END
-GO*/
+GO
+*/
 
 
 CREATE DATABASE MMTShop

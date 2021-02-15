@@ -29,16 +29,16 @@ fullfill a specific command.
 
 MMTShop.Shared contains the base implementation (service resolution) for the
 MenuCommandDispatcher which invokes a specific type of IDispatcherHandler based 
-on the command that was inputted (1,2, q). This is to enable future dispatchers
-to be easily implemented.
+on the command that was inputted (1,2, q). This is to enable future dispatchers 
+handlers to be easily implemented.
 
 In the case of the MenuCommandDispatcher, the dispatcher recieves a character 
-(char) input from the end-user and using the internal DispatcherDictionary it 
-determines which DispatchHandler should be resolved and invoked.
+(char) input from the end-user and using the internal dispatcher dictionary it 
+determines which dispatch handler should be resolved and invoked.
 
 To add additional menu options the additional handlers and associated modules 
 will need to be created/updated under the specific features they implement then 
-the internal DispatcherDictionary will need to be updated to include the necessary 
+the internal dispatcher dictionary will need to be updated to include the necessary 
 commands required to invoke them.
 
 The handlers and modules will automatically be available to the built-in 
