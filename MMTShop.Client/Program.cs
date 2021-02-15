@@ -23,10 +23,12 @@ namespace MMTShop.Client
             {
                 try
                 {
-                    await MenuCommandDispatcher.InvokeAsync<bool>(
-                        GeneralConstants.ServerCheckCommandCharacter, 
-                        applicationState, 
-                        CancellationToken.None);
+                    await MenuCommandDispatcher
+                        .InvokeAsync<bool>(
+                            GeneralConstants
+                                .ServerCheckCommandCharacter, 
+                            applicationState, 
+                            CancellationToken.None);
 
                     DisplayOptions();
 
