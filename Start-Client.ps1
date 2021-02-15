@@ -1,4 +1,4 @@
-$host.ui.RawUI.WindowTitle = “MMT Client”
+$host.ui.RawUI.WindowTitle = “MMT Shop Client”
 
 cd MMTShop.Client
 dotnet run 
