@@ -13,8 +13,7 @@ namespace MMTShop.Client.Features.Category
     public class CategoryModule 
         : ModuleBase, ICategoryModule
     {
-        public async Task<bool> DisplayCategoriesAsync(
-            Func<string, Task<bool>> getProductsByCategory,
+        public async Task<string> DisplayCategoriesAsync(
             CancellationToken cancellationToken)
         {
             var categories = await categoryProvider
@@ -31,18 +30,15 @@ namespace MMTShop.Client.Features.Category
                         categories, 
                         categoryName);
 
-                if (category != null)
+                if(category == null)
                 {
-                    await getProductsByCategory(categoryName);
-                    return true;
+                    throw new NullReferenceException("Category not found");
                 }
 
-                Console.WriteLine("Invalid category selected");
+                return categoryName;
             }
 
-            Console.WriteLine("No category selected");
-
-            return true;
+            throw new InvalidOperationException("No category selected");
         }
 
         public static void DisplayCategories(

@@ -18,13 +18,13 @@ namespace MMTShop.Client.Features.Category
             object state, 
             CancellationToken cancellationToken)
         {
-            return await categoryModule
+            var category = await categoryModule
                     .DisplayCategoriesAsync(
-                        async(categoryName) => await productModule
-                            .DisplayProductsByCategoryAsync(
-                                categoryName, 
-                                cancellationToken),
                         cancellationToken);
+
+            return await productModule
+                            .DisplayProductsByCategoryAsync(category, 
+                                                            cancellationToken);
         }
 
         public CategoryDispatcherHandler(

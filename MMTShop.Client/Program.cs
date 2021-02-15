@@ -2,6 +2,7 @@
 using MMTShop.Shared;
 using MMTShop.Shared.Constants;
 using MMTShop.Shared.Contracts;
+using MMTShop.Shared.Exceptions;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -75,11 +76,16 @@ namespace MMTShop.Client
                         applicationState,
                         CancellationToken.None);
             }
-            catch(NullReferenceException ex)
+            catch(DispatcherNotFoundException ex)
             {
                 throw new InvalidOperationException(
                     "Input must be a number between 1-2 or q to quit", 
                     ex);
+            }
+            catch(NullReferenceException ex)
+            {
+                throw new InvalidOperationException(
+                    ex.Message, ex);
             }
         }
 

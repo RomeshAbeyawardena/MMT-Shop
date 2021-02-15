@@ -1,4 +1,5 @@
 ﻿using MMTShop.Shared.Contracts;
+using MMTShop.Shared.Exceptions;
 using System;
 using System.Collections.Concurrent;
 using System.Threading;
@@ -19,7 +20,8 @@ namespace MMTShop.Shared.Base
                     .GetService(dispatcher) as IDispatcherHandler;
             }
 
-            throw new NullReferenceException("Dispatcher not found");
+            throw new DispatcherNotFoundException(
+                "Dispatcher not found for the specified command");
         }
 
         public IDispatcherHandler<TResult> GetDispatcherHandler<TResult>(
@@ -32,7 +34,8 @@ namespace MMTShop.Shared.Base
                 return genericDispatcher;
             }
 
-            throw new InvalidOperationException($"Dispatcher does not return a type of {nameof(TResult)}");
+            throw new InvalidCastException(
+                $"Dispatcher does not return a type of {nameof(TResult)}");
         }
 
         public object Invoke(
