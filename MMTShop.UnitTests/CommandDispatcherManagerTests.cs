@@ -3,6 +3,7 @@ using MMTShop.Client.Features.Category;
 using MMTShop.Client.Features.Product;
 using MMTShop.Client.Features.Quit;
 using MMTShop.Shared.Contracts;
+using MMTShop.Shared.Exceptions;
 using Moq;
 using NUnit.Framework;
 using System;
@@ -90,7 +91,7 @@ namespace MMTShop.UnitTests
         public void DispatcherManager_throws_NullReferenceException_when_command_is_invalid()
         {
             Assert
-                .Throws<NullReferenceException>(
+                .Throws<DispatcherNotFoundException>(
                     () =>  {
                             sut.GetDispatcherHandler<bool>('m');
                     });
