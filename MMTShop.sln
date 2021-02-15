@@ -16,6 +16,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Readme.md = Readme.md
 		Start-Client.ps1 = Start-Client.ps1
 		Start-Server.ps1 = Start-Server.ps1
+		Start.ps1 = Start.ps1
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Install", "Install", "{1773EF88-7D41-4914-A779-FBB7C97D1920}"
