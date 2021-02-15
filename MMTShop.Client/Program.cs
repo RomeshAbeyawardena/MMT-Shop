@@ -28,11 +28,12 @@ namespace MMTShop.Client
                         WaitForInput();
                     }
                 }
-                catch(InvalidOperationException exception)
+                catch(
+                    InvalidOperationException exception)
                 {
                     Console
                         .WriteLine(
-                        exception.Message);
+                            exception.Message);
                 }
             }
 
@@ -67,7 +68,7 @@ namespace MMTShop.Client
         {
             try 
             { 
-                return await CommandDispatcher
+                return await MenuCommandDispatcher
                     .InvokeAsync<bool>(
                         input, 
                         applicationState,
@@ -84,7 +85,7 @@ namespace MMTShop.Client
         #endregion
         
         #region Properties
-        private static ICommandDispatcher<char> CommandDispatcher => services
+        private static ICommandDispatcher<char> MenuCommandDispatcher => services
             .GetRequiredService<ICommandDispatcher<char>>();
         #endregion
 
