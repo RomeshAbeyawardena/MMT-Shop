@@ -61,7 +61,7 @@ as simple as possible.
       as a HTTP client to interact with the API. 
       Each feature is contained within a module and the Program.cs is considered 
       as the director that calls upon the modules when they are required using
-      dependency injection. Please read the Readme.md contained with the client 
+      dependency injection. Please read the Readme.md contained within the client 
       MMT.Shop.Client directory for further information.
 - MMTShop.Server
     - The API itself is implemented here, using Mediatr to 'glue' together 
@@ -104,7 +104,7 @@ and pages for a paging component to generate a pager on the MMT website.
 A further enhancement would be to cache the categories using a form of
 distributed caching implementation, such as Redis cache, to reduce the 
 resources used to constantly connect to the database each time for this
-information.
+data.
 
 ---
 

@@ -85,10 +85,10 @@ To prevent duplicate records, unique constraints were setup on the *Product*,
 
 - Category has a unique constraint to prevent duplicate names  
 - Product has a unique constraint to prevent duplicate names within a category
-- FeaturedPromotionCategory has unique constraint to prevent duplicate 
+- FeaturedPromotionCategory has a unique constraint to prevent duplicate 
   categories for a promotion
 
-#### Calculating the SKU for an inserted products
+#### Calculating the SKU for an inserted product
 I initially considered using an insert trigger to ensure the SKU generated 
 meets the following requirements
 > - Home - All SKU’s in the range 1xxxx
@@ -121,7 +121,8 @@ have been approached.
 
 If additional requirements become necessary to have specific products for a 
 promotion, that could be easily implemented with a new promotion product table
-to fully satify this requirement.
+to fully satify this requirement. The stored procedure usp_GetFeaturedProducts 
+would need to be updated, but no further code changes would be required.
 
 #### Move business rules to application layer
 
