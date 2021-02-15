@@ -5,10 +5,10 @@ namespace MMTShop.Shared.Contracts.Modules
 {
     public interface IProductModule
     {
-        Task<bool> DisplayFeaturedProducts(
+        Task<bool> DisplayFeaturedProductsAsync(
             CancellationToken cancellationToken);
 
-        Task<bool> DisplayProductsByCategory(
+        Task<bool> DisplayProductsByCategoryAsync(
             string categoryName,
             CancellationToken cancellationToken);
     }

@@ -19,9 +19,9 @@ namespace MMTShop.Client.Features.Category
             CancellationToken cancellationToken)
         {
             return await categoryModule
-                    .DisplayCategories(
+                    .DisplayCategoriesAsync(
                         async(categoryName) => await productModule
-                            .DisplayProductsByCategory(
+                            .DisplayProductsByCategoryAsync(
                                 categoryName, 
                                 cancellationToken),
                         cancellationToken);

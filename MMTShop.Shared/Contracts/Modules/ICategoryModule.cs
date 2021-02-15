@@ -6,7 +6,7 @@ namespace MMTShop.Shared.Contracts.Modules
 {
     public interface ICategoryModule
     {
-        Task<bool> DisplayCategories(
+        Task<bool> DisplayCategoriesAsync(
             Func<string, Task<bool>> getProductsByCategory,
             CancellationToken cancellationToken);
     }

@@ -13,7 +13,7 @@ namespace MMTShop.Client.Features.Category
     public class CategoryModule 
         : ModuleBase, ICategoryModule
     {
-        public async Task<bool> DisplayCategories(
+        public async Task<bool> DisplayCategoriesAsync(
             Func<string, Task<bool>> getProductsByCategory,
             CancellationToken cancellationToken)
         {
