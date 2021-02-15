@@ -85,7 +85,8 @@ namespace MMTShop.Client
             catch(NullReferenceException ex)
             {
                 throw new InvalidOperationException(
-                    ex.Message, ex);
+                    ex.Message, 
+                    ex);
             }
         }
 
