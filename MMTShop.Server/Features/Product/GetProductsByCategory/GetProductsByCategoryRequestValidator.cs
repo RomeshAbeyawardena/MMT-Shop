@@ -26,7 +26,8 @@ namespace MMTShop.Server.Features.Product.GetProductsByCategory
             CustomContext context, 
             CancellationToken cancellationToken)
         {
-            var categories = await categoryProvider.GetCategoriesAsync(cancellationToken);
+            var categories = await categoryProvider
+                .GetCategoriesAsync(cancellationToken);
 
             var category = categoryService
                 .GetCategory(categories, categoryName);
