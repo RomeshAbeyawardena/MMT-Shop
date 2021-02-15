@@ -16,13 +16,14 @@ namespace MMTShop.Client
             //Set as null to use value in appSettings.json, specify a base url to ignore the value in appSettings.json
             Initialize(
                 null);
-            Console.WriteLine("Welcome to MMT Shop.{0}", 
-                FormatConstants.NewLine);
-
+            
             while(applicationState.IsRunning)
             {
                 try
                 {
+                    Console.WriteLine("Welcome to MMT Shop.{0}", 
+                        FormatConstants.NewLine);
+
                     await MenuCommandDispatcher
                         .InvokeAsync<bool>(
                             GeneralConstants
