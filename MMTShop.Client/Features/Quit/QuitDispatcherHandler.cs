@@ -1,5 +1,4 @@
-﻿using MMTShop.Shared;
-using MMTShop.Shared.Base;
+﻿using MMTShop.Client.Base;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -20,10 +19,8 @@ namespace MMTShop.Client.Features.Quit
         public override bool Invoke(
             object state)
         {
-            if(state is ApplicationState applicationState)
-            {
-                applicationState.IsRunning = false;
-            }
+            GetApplicationState(state)
+                .IsRunning = false;
 
             return false;
         }
@@ -32,7 +29,6 @@ namespace MMTShop.Client.Features.Quit
             object state, 
             CancellationToken cancellationToken)
         {
-            
             return Task
                 .FromResult(
                     Invoke(state));

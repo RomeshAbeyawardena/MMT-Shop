@@ -1,5 +1,5 @@
 ﻿using MMTShop.Shared;
-using MMTShop.Shared.Base;
+using MMTShop.Client.Base;
 using MMTShop.Shared.Contracts.Provider;
 using System;
 using System.Threading;
@@ -61,10 +61,6 @@ namespace MMTShop.Client.Features.ServerCheck
             this.applicationSettings = applicationSettings;
             this.serverCheckProvider = serverCheckProvider;
         }
-
-        private ApplicationState GetApplicationState(object state) 
-            => (ApplicationState)state ?? 
-                throw new InvalidCastException("Unable to cast state object in ApplicationState");
 
         private readonly ApplicationSettings applicationSettings;
         private readonly IServerCheckProvider serverCheckProvider;
