@@ -1,5 +1,6 @@
 using MMTShop.Server.Features.Product.GetProductsByCategory;
 using MMTShop.Shared.Contracts.Provider;
+using MMTShop.Shared.Contracts.Services;
 using MMTShop.Shared.Models;
 using Moq;
 using NUnit.Framework;
@@ -15,7 +16,10 @@ namespace MMTShop.UnitTests.Validation
         public void Setup()
         {
             categoryProviderMock = new Mock<ICategoryProvider>();
-            sut = new GetProductsByCategoryRequestValidator(categoryProviderMock.Object);
+            categoryServiceMock =  new Mock<ICategoryService>();
+            sut = new GetProductsByCategoryRequestValidator(
+                categoryProviderMock.Object, 
+                categoryServiceMock.Object);
         }
 
         [Test]
@@ -80,7 +84,9 @@ namespace MMTShop.UnitTests.Validation
             categoryProviderMock
                 .Setup(a => a.GetCategoriesAsync(It.IsAny<CancellationToken>()))
                     .Returns(Task.FromResult<IEnumerable<Category>>(data));
-
+            categoryServiceMock
+                .Setup(a => a.GetCategory(It.IsAny<IEnumerable<Category>>(), "Garden"))
+                .Returns(new Category { Name = "Garden" });
             //act
             var validationResult = sut
                 .Validate(
@@ -93,5 +99,6 @@ namespace MMTShop.UnitTests.Validation
 
         private GetProductsByCategoryRequestValidator sut;
         private Mock<ICategoryProvider> categoryProviderMock;
+        private Mock<ICategoryService> categoryServiceMock;
     }
 }

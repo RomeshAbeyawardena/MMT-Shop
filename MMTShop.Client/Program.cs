@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using MMTShop.Shared;
 using MMTShop.Shared.Constants;
 using MMTShop.Shared.Contracts;
 using System;

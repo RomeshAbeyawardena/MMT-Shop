@@ -1,4 +1,4 @@
-﻿namespace MMTShop.Client
+﻿namespace MMTShop.Shared
 {
     public class ApplicationState
     {
