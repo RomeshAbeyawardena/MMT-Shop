@@ -17,7 +17,7 @@ namespace MMTShop.Client.Features.Product
         {
             var products = await productProvider
                 .GetFeaturedProductsAsync(
-                    CancellationToken.None);
+                    cancellationToken);
 
             DisplayProducts(products);
             return true;
@@ -30,7 +30,7 @@ namespace MMTShop.Client.Features.Product
             var products = await productProvider
                 .GetProductsByCategoryName(
                     categoryName,
-                    CancellationToken.None);
+                    cancellationToken);
 
             DisplayProducts(
                 products);

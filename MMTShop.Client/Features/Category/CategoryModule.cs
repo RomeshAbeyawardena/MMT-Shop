@@ -18,7 +18,7 @@ namespace MMTShop.Client.Features.Category
             CancellationToken cancellationToken)
         {
             var categories = await categoryProvider
-                .GetCategoriesAsync(CancellationToken.None);
+                .GetCategoriesAsync(cancellationToken);
 
             DisplayCategories(categories);
             Console.WriteLine(
