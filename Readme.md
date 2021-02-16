@@ -71,8 +71,7 @@ as simple as possible.
     - The API itself is implemented here, using Mediatr to 'glue' together 
       request and response object behaviours following the Mediator 
       pattern and pipelines along with some FluentValidation to keep 
-      dependencies in base classes to a minimum to maintain a flexible 
-      structure.
+      dependency coupling to a minimum.
 - MMTShop.Shared
     - Shared domain models and constants are housed here to keep things 
       as DRY as possible. Careful consideration was made to ensure classes
