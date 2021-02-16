@@ -7,7 +7,7 @@ This section outlines the requirements to build and run the application
 ### Development environment
 The project was built using vanilla (without extensions) 
 Visual Studio 2019 (v16.8.4) targetting .NET 5 (v5.0.103) - it should build 
-and compile with any version of .NET 5.
+and run with any version of .NET 5.
 
 The database server used during development was SQL Server 2019, 
 however the database scripts should be compatible with SQL Server 2017+.
