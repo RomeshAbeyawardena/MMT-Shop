@@ -14,13 +14,20 @@ namespace MMTShop.Client.Features.Category
     public class CategoryModule 
         : ModuleBase, ICategoryModule
     {
-        public async Task<string> DisplayCategoriesAsync(
+        public async Task<IEnumerable<Models.Category>> GetAndDisplayCategoriesAsync(
             CancellationToken cancellationToken)
         {
             var categories = await categoryProvider
                 .GetCategoriesAsync(cancellationToken);
 
             DisplayCategories(categories);
+
+            return categories;
+        }
+
+        public string GetSelectedCategory(
+            IEnumerable<Models.Category> categories)
+        {
             Console.WriteLine(
                 "Enter the category you wish to view products for:");
 

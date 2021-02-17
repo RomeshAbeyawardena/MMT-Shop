@@ -1,11 +1,16 @@
-﻿using System.Threading;
+﻿using MMTShop.Shared.Models;
+using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace MMTShop.Shared.Contracts.Modules
 {
     public interface ICategoryModule
     {
-        Task<string> DisplayCategoriesAsync(
+        Task<IEnumerable<Category>> GetAndDisplayCategoriesAsync(
             CancellationToken cancellationToken);
+
+        string GetSelectedCategory(
+            IEnumerable<Category> categories);
     }
 }
